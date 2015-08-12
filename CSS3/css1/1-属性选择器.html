@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+div[type] {background:red;}
+div[dt="box2"] {background:green;}
+p[ptype~="p2"] {background: yellow;}
+p[pT^="p2"] {background:pink;}
+div[dT$="5box"] {background:#36C;}
+div[dT*="222"] {background:#0F6;}
+div[dty|="ab"] {background:#90F;}
+</style>
+</head>
+<body>
+<div type="box1">E[attr]只使用属性名，但没有确定任何属性值</div>
+<div dT="box2">E[attr="value"]指定属性名，并指定了该属性的属性值</div>
+<p ptype="p1 p2">E[attr~="value"]指定属性名，并且具有属性值，此属性值是一个词列表，并且以空格隔开，其中词列表中包含了一个value词，而且等号前面的“~”不能不写</p>
+<p pT="p23">E[attr^="value"]指定了属性名，并且有属性值，属性值是以value开头的</p>
+<div dT="box345box" dty="box4">E[attr$="value"]指定了属性名，并且有属性值，而且属性值是以value结束的</div>
+<div dT="box222type">E[attr*="value"]指定了属性名，并且有属性值，而且属值中包含了value</div>
+<div dty="ab">E[attr|="value"]指定了属性名，并且属性值是value或者以“value-”开头的值（比如说zh-cn）</div>
+<div dty="ab-Yo">实例：百度文库;</div>
+<p pT="p2pt">备注：IE7及以上支持;</p>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	
+	#div1 {width: 100px; height: 100px; background: red; position: absolute; top: 50px; left: 0;}
+	#bg {width:1px; height: 500px; background: #000; position: absolute; top: 0; left: 500px;}
+</style>
+<script type="text/javascript">
+	window.onload = function() {
+
+		// 没有损失的弹性运动
+		var oBtn = document.getElementById('btn1');
+		var oDiv = document.getElementById('div1');
+
+		var timer = null;
+		var iSpeed = 0;
+		// var num = 0;
+
+		oBtn.onclick = function() {
+
+			clearInterval(timer);
+			timer = setInterval(function(){
+				// num++;
+				if( oDiv.offsetLeft < 500 ){
+					iSpeed += 3;
+				}else {
+					iSpeed -= 3;
+				}
+				// console.log(oDiv.offsetLeft + ',' + iSpeed);
+				oDiv.style.left = oDiv.offsetLeft + iSpeed + 'px';
+
+				// if(num == 200){
+				// 	clearInterval(timer);
+				// }
+
+			}, 30);
+
+		}
+
+	}
+</script>
+</head>
+<body>
+	<input type='button' id='btn1' value='Start Move' />
+	<div id='div1'></div>
+	<div id='bg'></div>
+</body>
+</html>

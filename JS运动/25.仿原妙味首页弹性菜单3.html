@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	* {padding: 0; margin: 0;}
+	#ul1 {width:428px; height:30px; margin: 50px auto; position: relative;}
+	#ul1 li {width: 100px; height: 30px; line-height: 30px; border: 1px solid #000; margin-right: 5px; float: left; list-style:none; text-align: center; }
+	#ul1 .nav { background: #F6E3AB;}
+	#ul1 #cover { position: absolute; top: 0; left: 0; overflow: hidden; background: blue;}
+	#ul1 #cover ul { width:428px; color: white; position: absolute; top: -1px; left: -1px;}
+
+</style>
+<script type="text/javascript">
+	
+	window.onload = function() {
+
+		var oUl = document.getElementById('ul1');
+		var oCov = document.getElementById('cover');
+
+		var aLi = oUl.getElementsByClassName('nav');
+		var oChildUl = oCov.getElementsByTagName('ul')[0];
+
+		var timer = null;
+		var iSpeed = 0;
+		var timer2 = null;
+
+		for(var i=0; i<aLi.length; i++){
+			aLi[i].onmouseover = function() {
+				clearTimeout(timer2);
+				startMove( this.offsetLeft );
+			}
+
+			aLi[i].onmouseout = function() {
+				timer2 = setTimeout(function(){
+					startMove( 0 );
+				}, 100);
+			}
+		}
+
+		oCov.onmouseover = function() {
+			clearTimeout(timer2);
+		}
+
+		oCov.onmouseout = function() {
+			timer2 = setTimeout(function(){
+				startMove( 0 );
+			}, 100);
+		}
+
+
+		function startMove(iTarget) {
+			
+			clearInterval(timer);
+			timer = setInterval(function(){
+
+				iSpeed += (iTarget - oCov.offsetLeft) / 6;
+				iSpeed *= 0.75;
+
+				if( Math.abs(iSpeed) <=1 && Math.abs(iTarget - oCov.offsetLeft) <= 1 ){
+					clearInterval(timer);
+					iSpeed = 0;
+					oCov.style.left = iTarget + 'px';  // 单位不要老是忘记带
+					oChildUl.style.left = - iTarget + 'px';
+				}else{
+					oCov.style.left = oCov.offsetLeft + iSpeed + 'px';
+					oChildUl.style.left = - oCov.offsetLeft + 'px';
+				}
+
+			},30);
+
+		}
+
+
+
+	}
+
+</script>
+</head>
+<body>
+	<ul id='ul1'>
+		<li id='cover'>
+			<ul>
+				<li>首页</li>
+				<li>论坛</li>
+				<li>视频</li>
+				<li>留言</li>
+			</ul>
+		</li>
+		<li class='nav'>首页</li>
+		<li class='nav'>论坛</li>
+		<li class='nav'>视频</li>
+		<li class='nav'>留言</li>
+	</ul>
+</body>
+</html>

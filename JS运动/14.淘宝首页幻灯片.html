@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	div, ul, p {padding: 0; margin: 0;}
+	#div1 {width:520px; height: 280px; border: 1px solid #000; margin: 100px auto; position: relative; overflow: hidden;}
+	#ul1 { height: 280px; position: absolute; left: 0;}
+	#ul1 li {width:520px; height: 280px; float: left; list-style: none;}
+	#ul1 img {width:520px; height: 280px; display: block; border: none; vertical-align: top;}
+	#div1 p {position: absolute; bottom: 10px; width: 520px; line-height: 30px; text-align: center;}
+	#div1 p span {padding: 2px 13px; background: #CCC; border-radius: 50%; margin: 2px;  cursor: pointer;}
+	#div1 p span.current {padding: 2px 13px; background: #FADA8C; border-radius: 50%; margin: 2px;  cursor: pointer;}
+</style>
+<script type="text/javascript" src="move.js"></script>
+<script type="text/javascript">
+	
+	window.onload = function() {
+
+		var oUl = document.getElementById('ul1');
+		var oP = document.getElementById('p1');
+
+		var aLi = oUl.getElementsByTagName('li');
+		var aSpan = oP.getElementsByTagName('span');
+
+		var len = aLi.length;
+		var iWidth = aLi[0].offsetWidth;
+
+		oUl.style.width = iWidth * len + 'px';
+
+		for(var i=0; i<aSpan.length; i++){
+			aSpan[i].index = i;
+
+			aSpan[i].onclick = function() {
+
+				// oUl.style.left = -(iWidth * this.index) + 'px';
+				for(var i=0; i<aSpan.length; i++) {
+					aSpan[i].className = '';
+				}
+
+				this.className = 'current';
+
+				startMove(oUl, {
+					'left' : -iWidth * this.index
+				})
+
+			}
+
+		}
+
+	}
+
+</script>
+</head>
+<body>
+	<div id="div1">
+    	<ul id="ul1">
+        	<li><img src="images/1.png" /></li>
+            <li><img src="images/2.jpg" /></li>
+            <li><img src="images/3.jpg" /></li>
+            <li><img src="images/4.jpg" /></li>
+            <li><img src="images/5.jpg" /></li>
+            <li><img src="images/6.jpg" /></li>
+        </ul>
+        <p id='p1'>
+        	<span class="current"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </p>
+    </div>
+</body>
+</html>

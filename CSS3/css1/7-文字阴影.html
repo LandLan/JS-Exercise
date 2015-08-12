@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+.txt1 {font:100px/120px "微软雅黑";text-align:center; text-shadow:20px 20px 20px #0F3; border:1px solid #000;}
+.txt2 {font:100px/120px "微软雅黑";text-align:center; text-shadow:20px 20px 0px red, 40px 40px 0 green; border:1px solid #000;}
+.txt3 {font:100px/120px "微软雅黑";  text-align:center;  text-shadow:2px 2px 0px white, 4px 4px 0px red; border:1px solid #000; color:red;}
+.txt4 {font:100px/120px "微软雅黑";text-align:center;  text-shadow:0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de; color:white;}
+.txt5 {font:100px/120px "微软雅黑";font-weight:bold;text-align:center; text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;  color:white;}
+.txt6 {font:100px/120px "微软雅黑";font-weight:bold;text-align:center; border:1px solid #000; -webkit-text-stroke:4px red;}
+</style>
+</head>
+
+<body>
+文字阴影<br/>
+text-shadow：x y blur color, …<br/>
+参数<br/>
+x&nbsp;&nbsp;&nbsp;		横向偏移<br/>
+y&nbsp;&nbsp;&nbsp;		纵向偏移<br/>
+blur&nbsp;&nbsp;&nbsp;		模糊距离<br/>
+color&nbsp;&nbsp;&nbsp;		阴影颜色<br/>
+
+<div class="txt1">妙味课堂</div>
+<br/>
+阴影叠加<br/><br/>
+text-shadow:2px 2px 0px red, 2px 2px 4px green;<br/>
+先渲染后面的，再渲染前面的<br/>
+
+<div class="txt2">妙味课堂</div>
+<br/>
+几个好玩的例子<br/><br/>
+层叠：color:red; font-size:100px; font-weight:bold; text-shadow:2px 2px 0px white, 4px 4px 0px red;<br/>
+
+<div class="txt3">妙味课堂</div>
+<br/>
+光晕：color:white; font-size:100px; text-shadow:0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
+<br/>
+<div class="txt4">妙味课堂</div>
+<br/>
+火焰文字：text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e; font-family:Verdana, Geneva, sans-serif; font-size:100px; font-weight:bold; color:white;
+<br/><br/>
+<div class="txt5">妙味课堂</div>
+
+<br/>
+文字描边<br/>
+-webkit-text-stroke:宽度 颜色  (谷歌和safari支持)
+<br/>
+<div class="txt6">妙味课堂</div>
+
+</body>
+</html>

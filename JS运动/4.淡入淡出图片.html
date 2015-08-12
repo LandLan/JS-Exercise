@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	#img1 { opacity: 0.3; filter:alpha(opacity=30);}
+</style>
+<script type="text/javascript">
+	window.onload = function () {
+
+		var oImg = document.getElementById('img1');
+		var timer = null;
+
+		oImg.onmouseover = function() {
+			// alert(getCss(this, 'opacity'));
+			startMove(100, 10);
+		}
+
+		oImg.onmouseout = function() {
+			startMove(30, -10);
+		}
+
+		function startMove(target, speed) {
+
+			clearInterval(timer);
+			
+			timer = setInterval(function() {
+
+				var opacityNow = Math.round(getCss(oImg, 'opacity') * 100);  //safari下会产生精度问题
+
+				if( opacityNow == target) {
+
+					clearInterval(timer);
+
+				}else {
+					oImg.style.opacity = ( opacityNow + speed ) / 100;
+					oImg.style.filter = "alpha(opacity="+ opacityNow + speed +")";
+				}
+				
+			}, 30)
+
+		}
+
+		function getCss(obj, attr) {
+
+			if( obj. currentStyle ) {
+				return obj.currentStyle[attr];
+			}else {
+				return getComputedStyle(obj)[attr];
+			}
+
+		}
+
+	}
+</script>
+</head>
+<body>
+	<img id='img1' src="img/1.jpg" />
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	#div1 {width:100px; height: 200px; background: red; position: absolute; left: -100px; top: 50px;}
+	#div2 {width:30px; height: 90px; background: #F5EB8B; position: absolute; right: -30px; text-align: center; line-height: 30px; top: 60px;}
+	#img1 { opacity: 0.3; filter:alpha(opacity=30); position: absolute; top: 100px; left: 250px;}
+</style>
+<script type="text/javascript">
+	window.onload = function(){
+		var oDiv1 = document.getElementById('div1');
+		var oDiv2 = document.getElementById('div2');
+		var oImg = document.getElementById('img1');
+		// var timer = null;
+
+		oDiv1.onmouseover = function() {
+			startMove(this, 'left', 0, 10);
+		}
+
+		oDiv1.onmouseout = function() {
+			startMove(this, 'left', -100, -10);
+		}
+
+		oImg.onmouseover = function() {
+			startMove(this, 'opacity', 100, 10);
+		}
+
+		oImg.onmouseout = function() {
+			startMove(this, 'opacity', 30, -10);
+		}
+
+		function startMove(obj, attr, target, speed) {
+
+			clearInterval(obj.timer);
+			var iCur = 0;
+			obj.timer = setInterval(function() {
+				if( attr == 'opacity' ){
+					iCur = Math.round(getCss(oImg, 'opacity') * 100);
+				}else{
+					iCur = parseInt( getCss(obj, attr) );
+				}
+				if( iCur == target ) {
+					clearInterval(obj.timer);
+				} else {
+					if( attr == 'opacity' ){
+						obj.style.opacity = ( iCur + speed ) / 100;
+						obj.style.filter = "alpha(opacity="+ iCur + speed +")";
+					}else{
+						obj.style[attr] = iCur + speed + 'px';
+					}
+				}
+			}, 30)
+
+		}
+
+		function getCss(obj, attr) {
+
+			if( obj. currentStyle ) {
+				return obj.currentStyle[attr];
+			}else {
+				return getComputedStyle(obj)[attr];
+			}
+
+		}
+
+	}
+
+</script>
+</head>
+<body>
+	<div id='div1'>
+		<div id='div2'>分享到</div>
+	</div>
+	<img id='img1' src="img/1.jpg" />
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+div {width:200px; height:100px; background:#000; color:#fff; font: 28px/40px "Arial"; display:none;}
+div:target {display:block;}
+input:nth-of-type(1):enabled {font-size:22px;}
+input:disabled {font-size:12px;}
+
+input[type="checkbox"]:checked {width:100px; height:20px;}
+input[type="radio"]:checked {width:200px; height:20px;}
+
+p {width:350px;}
+p:first-line {background:yellow;}
+p:first-letter {font-size:20px; color:red; font-weight:bold;}
+p::selection {background:#0F3;} 
+p::before {content:"START"; display:block; height:30px;}
+p::after {content:"END";}
+
+p~div{width:50px; height:50px; background:#fd9; display:block;}
+
+h1:not(.uu) {background:#6FF;}
+</style>
+</head>
+
+<body>
+E:target 表示当前的URL片段的元素类型，这个元素必须是E<br/>
+E:disabled 表示不可点击的表单控件<br/>
+E:enabled 表示可点击的表单控件<br/>
+E:checked 表示已选中的checkbox或radio<br/>
+E:first-line 表示E元素中的第一行<br/>
+E:first-letter 表示E元素中的第一个字符<br/>
+E::selection表示E元素在用户选中文字时<br/>
+E::before 生成内容在E元素前<br/>
+E::after 生成内容在E元素后<br/>
+E:not(s) 表示E元素不被匹配<br/>
+E~F表示E元素毗邻的F元素<br/>
+Content 属性<br/>
+
+<a href="#div1">div1</a>
+<a href="#div2">div2</a>
+<a href="#div3">div3</a>
+
+<div id="div1">div1</div>
+<div id="div2">div2</div>
+<div id="div3">div3</div>
+
+<br/><br/><br/>
+
+<input type="button" value="Click Me!" />
+<input type="button" value="Click Me!" />
+<input type="button" value="Click Me!" disabled />
+
+<br/>
+
+<input type="checkbox" name="U" /> U
+<input type="checkbox" name="U" checked /> I
+<input type="checkbox" name="U" /> H
+
+<br/>
+
+<input type="radio" name="I" /> I
+<input type="radio" name="I" /> U
+
+
+
+<p>本课程的应用范围：
+
+1、这是一个实战课程，属于市场极度稀缺的课程，同时又是一个完整的实战开发课程，这意味着：当学完以后，你直接可以将它作为 你个人的新项目实战作品，为你的技能加分、提高求职竞争力！
+！
+</p>
+
+<div></div>
+
+<h1>111</h1>
+<h1 class="uu">222</h1>
+<h1>333</h1>
+
+</body>
+</html>

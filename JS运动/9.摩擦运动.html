@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	#div1 {background: #ff0000; width:100px; height: 100px; position: absolute; top: 50px; left: 0px;}
+	#div2 {background: #000; width:2px; height: 300px; position: absolute; top: 50px; left: 500px;}
+</style>
+<script type="text/javascript">
+	window.onload = function() {
+
+		var oBtn = document.getElementById('btn1');
+		var oDiv = document.getElementById('div1');
+		var timer = null;
+		var iSpeed = 50;
+
+		oBtn.onclick = function() {
+
+			clearInterval(timer);
+			
+			timer = setInterval(function() {
+					
+				iSpeed *= 0.92;
+				
+				var temp = oDiv.offsetLeft + iSpeed;
+
+				if (temp >= 500) {
+					oDiv.style.left = '500px';
+					clearInterval(timer);
+				} else {
+					oDiv.style.left = temp + 'px';
+				}
+				
+			}, 30);
+
+		}
+
+	}
+</script>
+</head>
+<body>
+	<input id='btn1' type='button' value='Click' />
+	<div id='div1'></div>
+	<div id='div2'></div>
+</body>
+</html>

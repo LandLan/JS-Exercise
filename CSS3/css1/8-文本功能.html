@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+p {border:1px solid #000; width:800px; margin: 10px; }
+p:nth-of-type(1){direction:ltr;}
+p:nth-of-type(2){direction:rtl;}
+p:nth-of-type(3){direction:rtl; unicode-bidi:bidi-override;}
+p:nth-of-type(4){text-overflow:clip; overflow:hidden; white-space:nowrap;}
+p:nth-of-type(5){text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+</style>
+</head>
+
+<body>
+direction  定义文字排列方式(全兼容)<br/>
+rtl &nbsp;&nbsp;&nbsp; 从右向左排列<br/>
+ltr &nbsp;&nbsp;&nbsp; 从左向右排列<br/>
+注意要配合unicode-bidi 一块使用<br/><br/>
+
+p:nth-of-type(1){direction:ltr;} <br/>
+
+<p>Life is too short to spend time regretting. If it's not the end, smile and keep on going. 生命太短，没时间留给遗憾。若不是终点，请微笑一直向前。</p>
+
+p:nth-of-type(2){direction:rtl;}<br/>
+
+<p>Life is too short to spend time regretting. If it's not the end, smile and keep on going. 生命太短，没时间留给遗憾。若不是终点，请微笑一直向前。</p>
+
+p:nth-of-type(3){direction:rtl; unicode-bidi:bidi-override;}<br/>
+
+<p>Life is too short to spend time regretting. If it's not the end, smile and keep on going. 生命太短，没时间留给遗憾。若不是终点，请微笑一直向前。</p>
+
+<br/>
+
+text-overflow &nbsp;&nbsp;&nbsp; 定义省略文本的处理方式<br/>
+clip &nbsp;&nbsp;&nbsp; 无省略号<br/>
+ellipsis &nbsp;&nbsp;&nbsp; 省略号 (注意配合overflow:hidden和white-space:nowrap一块使用) <br/><br/>
+
+p:nth-of-type(4){text-overflow:clip; overflow:hidden; white-space:nowrap;}<br/>
+<p>Life is too short to spend time regretting. If it's not the end, smile and keep on going. 生命太短，没时间留给遗憾。若不是终点，请微笑一直向前。</p>
+
+p:nth-of-type(5){text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}<br/>
+<p>Life is too short to spend time regretting. If it's not the end, smile and keep on going. 生命太短，没时间留给遗憾。若不是终点，请微笑一直向前。</p>
+
+</body>
+</html>

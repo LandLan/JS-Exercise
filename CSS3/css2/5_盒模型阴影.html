@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+	.box1 {width:100px; height:100px; background:blue; box-shadow: 10px 10px 20px 5px red;}
+/*	.box2{ background:#000;}
+*/	.img1{display:block;--margin:0 auto;-webkit-box-reflect:right 10px -webkit-linear-gradient(right,rgba(0,0,0,1) 0,rgba(0,0,0,0) 50%);}
+</style>
+</head>
+
+<body>
+
+盒模型阴影<br/>
+• box-shadow:[inset] x y blur [spread] color <br/>
+• 参数 <br/>
+&nbsp;&nbsp;&nbsp;	○ inset：投影方式 <br/>
+&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		□ inset：内投影 <br/>
+&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		□ 不给：外投影 <br/>
+&nbsp;&nbsp;&nbsp;	○ x、y：阴影偏移<br/>
+&nbsp;&nbsp;&nbsp;	○ blur：模糊半径<br/>
+&nbsp;&nbsp;&nbsp;	○ spread：扩展阴影半径<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			□ 先扩展原有形状，再开始画阴影<br/>
+&nbsp;&nbsp;&nbsp;	○ color<br/><br/><br/>
+
+
+<div class="box1"></div>
+
+<br/><br/><br/>
+• box-reflect 倒影 （-webkit-内核浏览器适用）<br/>
+&nbsp;&nbsp;&nbsp;	• direction  方向     above|below|left|right;<br/>
+&nbsp;&nbsp;&nbsp;	• 距离<br/>
+&nbsp;&nbsp;&nbsp;	• 渐变（可选）<br/><br/><br/>
+
+<!--<div class="box2">
+--><img class="img1" src="miaov.jpg" />
+<!--</div>
+--></body>
+</html>

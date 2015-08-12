@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	#div1 {width: 100px; height: 100px; background: red; position: absolute; top: 0; left: 0;}
+	.box{ border:1px #000 solid; position:absolute;}
+</style>
+<script type="text/javascript">
+	window.onload = function() {
+
+		var oDiv = document.getElementById('div1');
+
+		oDiv.onmousedown = function(ev) {
+			var ev = ev || window.event;
+			var disX = ev.clientX - oDiv.offsetLeft;
+			var disY = ev.clientY - oDiv.offsetTop;
+
+			document.onmousemove = function(ev){
+
+				var ev = ev || window.event;
+				oDiv.style.left = ev.clientX - disX + 'px';
+				oDiv.style.top = ev.clientY - disY + 'px';
+
+				var oDot = document.createElement('div');
+				oDot.className = 'box';
+
+				document.body.appendChild(oDot);
+				oDot.style.left = ev.clientX + 'px';
+				oDot.style.top = ev.clientY + 'px';
+				// 移动的速度快，两个小点之间的距离就远，移动速度慢，两个小点的距离就近。通过计算两个小点的距离可以计算移动抛出物体的速度大小。
+			}
+
+			document.onmouseup = function() {
+				document.onmousemove = document.onmouseup = null;
+			}
+
+
+			return false;
+
+		}
+
+
+	}
+</script>
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	#div1 {width: 100px; height: 100px; background: red; position: absolute; top: 50px; left: 0;}
+</style>
+<script type="text/javascript">
+	
+	window.onload = function() {
+		var oBtn = document.getElementById('btn1');
+		var oDiv = document.getElementById('div1');
+		var timer = null;
+		var iSpeed = 0;
+		var iSpeedX = 10;
+
+		oBtn.onclick = function(){
+
+			clearInterval(timer);
+			timer = setInterval(function(){
+
+				iSpeed += 3;
+				var T = oDiv.offsetTop + iSpeed;
+				var L = oDiv.offsetLeft + iSpeedX;
+
+				if( T > document.documentElement.clientHeight - oDiv.offsetHeight ){
+					T = document.documentElement.clientHeight - oDiv.offsetHeight;
+					iSpeed *= -1;
+					iSpeed *= 0.75;
+					iSpeedX *= 0.75;
+				}
+
+				oDiv.style.top = T + 'px';
+				oDiv.style.left = L + 'px';
+
+
+
+			}, 30);
+
+		}
+	}
+
+</script>
+</head>
+<body>
+	<input type='button' id='btn1' value='Start Move' />
+	<div id='div1'></div>
+</body>
+</html>

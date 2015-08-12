@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	#txt1 {width: 400px; height: 250px; resize: none;}
+	#ul1 { width: 600px; height: 500px; border: 1px solid #000; float: right; margin: 0; padding: 0; overflow: hidden;}
+	#ul1 li { width: 560px; margin: 5px 20px; border-bottom: 1px dotted #000; list-style: none; line-height: 30px; font-size: 18px;}
+
+</style>
+<script type="text/javascript">
+	
+	window.onload = function() {
+
+		var oTxt = document.getElementById('txt1');
+		var oBtn = document.getElementById('btn1');
+		var oUl = document.getElementById('ul1');
+
+
+		oBtn.onclick = function() {
+
+			var sTxt = oTxt.value;
+			// console.log(sTxt);
+
+			var oLi = document.createElement('li');
+			oLi.innerHTML = sTxt;
+			if(oUl.children[0]){
+				oUl.insertBefore(oLi, oUl.children[0]);
+			}else{
+				oUl.appendChild(oLi);
+			}
+
+			// var iHeight = oLi.offsetHeight; //这个获取的Li的高度包含1px的border-bottom
+			// alert(iHeight);
+			var iHeight = parseInt( getCss(oLi, 'height') );  // 100px
+			// alert(iHeight);
+
+			oLi.style.height = '0px';
+			oLi.style.opacity = '0';
+			oLi.style.filter = 'alpha(opacity=0)';
+
+			startMove(oLi, {
+				'height' : iHeight, 
+				'opacity' : 100
+			});
+
+		}
+
+
+		function startMove(obj, json) {
+
+			clearInterval(obj.timer);
+			var iCur = 0;
+
+			
+			obj.timer = setInterval(function() {
+				var b = true; //用来判断是否所有的属性都已改变
+				for( var attr in json ) {
+
+					if( attr == 'opacity' ){
+						iCur = Math.round(getCss(obj, 'opacity') * 100);
+					}else{
+						iCur = parseInt( getCss(obj, attr) );
+					}
+					var target = json[attr];
+					var speed = ( target - iCur ) / 8;
+					speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+					if( iCur !=  target) {
+						if( attr == 'opacity' ){
+							obj.style.opacity = ( iCur + speed ) / 100;
+							obj.style.filter = "alpha(opacity="+ iCur + speed +")";
+						}else{
+							obj.style[attr] = iCur + speed + 'px';
+						}
+						b = false;
+					}
+					
+				}
+
+				if( b ) {
+					clearInterval(obj.timer);
+				}
+
+			}, 30);
+
+		}
+
+		function getCss(obj, attr){
+			return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+		}
+	}
+
+</script>
+</head>
+<body>
+	<textarea id='txt1'></textarea>
+	<input type='button' id='btn1' value='留言' />
+	<ul id='ul1'><!-- 
+		<li>1111111</li>
+		<li>111111</li>
+		<li>11111111111</li> -->
+	</ul>
+</body>
+</html>

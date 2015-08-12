@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript">
+	window.onload = function() {
+
+		// 就是加载完一张图片后再去加载下面一张图片
+
+		var arr = [
+					'http://c.hiphotos.baidu.com/image/pic/item/8601a18b87d6277f7c5b36ab2b381f30e824fcdc.jpg',
+					'http://f.hiphotos.baidu.com/image/pic/item/7e3e6709c93d70cf66d7ff03fadcd100baa12b8a.jpg',
+					'http://e.hiphotos.baidu.com/image/pic/item/a9d3fd1f4134970ab4010a2597cad1c8a7865d4d.jpg',
+					'http://f.hiphotos.baidu.com/image/pic/item/a08b87d6277f9e2fa2e847f21c30e924b999f36f.jpg',
+					'http://c.hiphotos.baidu.com/image/pic/item/9f510fb30f2442a74be99b32d243ad4bd0130245.jpg',
+					'http://e.hiphotos.baidu.com/image/pic/item/8718367adab44aed52461b14b01c8701a18bfb32.jpg',
+					'http://b.hiphotos.baidu.com/image/pic/item/37d12f2eb9389b5096137c5c8735e5dde6116ed4.jpg',
+					'http://b.hiphotos.baidu.com/image/pic/item/023b5bb5c9ea15ceff4d5801b4003af33a87b213.jpg',
+					'http://b.hiphotos.baidu.com/image/pic/item/9213b07eca80653815e0dc1a95dda144ad3482b4.jpg',
+					'http://f.hiphotos.baidu.com/image/pic/item/b58f8c5494eef01fc79ebbcce2fe9925bc317d35.jpg'
+				  ];
+
+		var oImg = document.getElementById('img1');
+
+		var oImage = new Image();
+
+		var index = num = 0;
+
+		oImg.onclick = function() {
+
+			if(num < arr.length-1) {
+				num++;
+			}
+			
+			oImg.src = arr[num];
+
+		}
+
+		imgLoad();
+
+		function imgLoad(){
+			oImage.src = arr[index];
+			
+			oImage.onload = function() {
+
+				index++;
+				if( index <= arr.length) {
+					imgLoad();
+				}
+				document.title = index + ' / ' + arr.length;
+			}
+		}
+
+
+	}
+</script>
+</head>
+<body>
+	<img id='img1' src="http://c.hiphotos.baidu.com/image/pic/item/8601a18b87d6277f7c5b36ab2b381f30e824fcdc.jpg" alt="" />
+</body>
+</html>

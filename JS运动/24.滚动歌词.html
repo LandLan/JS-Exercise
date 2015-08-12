@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	div {width:600px; line-height: 30px; position: absolute; left: 0; top: 0;}
+	#div2 { color: red; width: 16px; height: 30px; overflow: hidden;}
+	#div2 span{ position:absolute; left:0; top:0; width:2000px;}
+</style>
+<script type="text/javascript">
+	
+	window.onload = function(){
+		var oDiv2 = document.getElementById('div2');
+		var oSpan = oDiv2.getElementsByTagName('span')[0];
+		var timer = null;
+
+		timer = setInterval(function() {
+
+			var iSpeed = 1;
+
+			oDiv2.style.left = oDiv2.offsetLeft + iSpeed + 'px';
+			// oSpan.style.left = oSpan.offsetLeft - iSpeed + 'px';
+			oSpan.style.left = -oDiv2.offsetLeft + 'px';
+
+		}, 30);
+
+	}
+
+</script>
+</head>
+<body>
+	<div id='div1'><span>细雨带风湿透黄昏的街道 抹去雨水双眼无故地仰望</span></div>
+	<div id='div2'><span>细雨带风湿透黄昏的街道 抹去雨水双眼无故地仰望</span></div>
+</body>
+</html>
