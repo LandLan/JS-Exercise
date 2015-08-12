@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	.yellow {background:yellow;}
+</style>
+<script type="text/javascript">
+	window.onload = function(){
+
+		var oText = document.getElementById('text1');
+		var oBtn = document.getElementById('btn');
+		var oBtn2 = document.getElementById('btn2');
+		var oUl1 = document.getElementById('ul1');
+		
+		oBtn.onclick = function(){
+			var oLi = document.createElement('li');
+			var aLi = oUl1.getElementsByTagName('li');
+			oLi.innerHTML = oText.value;
+			oLi.onclick = function(){
+				if(this.className){
+					this.className = '';
+				}else{
+					this.className = 'yellow';
+				}
+			}
+
+			if(aLi.length == 5){
+				oUl1.removeChild(oUl1.children[oUl1.children.length-1]);
+			}
+			
+			oUl1.insertBefore(oLi, oUl1.children[0]);
+
+		}
+
+		oBtn2.onclick = function(){
+			var aLi = oUl1.getElementsByTagName('li');
+			for(var i=0; i<aLi.length; i++){
+				if(aLi[i].className == 'yellow'){
+					oUl1.removeChild(aLi[i]);
+				}
+			}
+		}
+
+	}
+</script>
+</head>
+<body>
+	<input type="text" value="" id='text1' />
+	<input type="button" value='添加' id='btn' />
+
+	<input type="button" value='批量删除' id='btn2' />
+	<ul id='ul1'>
+		
+	</ul>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript">
+	
+	window.onload = function(){
+
+		var oTab = document.getElementById('table');
+
+		var oData = [
+			{'id':1, 'name':'张一', 'age': 20, 'sex': '女'},
+			{'id':2, 'name':'张二', 'age': 21, 'sex': '男'},
+			{'id':3, 'name':'张三', 'age': 22, 'sex': '男'},
+			{'id':4, 'name':'张四', 'age': 23, 'sex': '女'}
+		];
+
+
+		for(var i=0; i<oData.length; i++){
+
+			var oTbody = oTab.tBodies[0];
+
+			var oTr = document.createElement('tr');
+			var oTd = document.createElement('td');
+
+
+			var oCheckBox = document.createElement('input');
+			oCheckBox.type = 'checkbox';
+			oCheckBox.name = 'chk';
+			oTd.appendChild(oCheckBox);
+			oTr.appendChild(oTd);
+
+			oTd = document.createElement('td');
+			oTd.innerHTML = oData[i].id;
+			oTr.appendChild(oTd);
+
+			oTd = document.createElement('td');
+			oTd.innerHTML = oData[i].name;
+			oTr.appendChild(oTd);
+
+			oTd = document.createElement('td');
+			oTd.innerHTML = oData[i].age;
+			oTr.appendChild(oTd);
+
+			oTd = document.createElement('td');
+			oTd.innerHTML = oData[i].sex;
+			oTr.appendChild(oTd);
+
+			oTbody.appendChild(oTr);
+
+		}
+
+
+		var oForm = document.getElementById('form');
+
+		oForm.btn.onclick = function(){
+			// alert(1)
+
+			var strId = oForm.id.value;
+			var strName = oForm.name.value;
+			var strAge = oForm.age.value;
+			var strSex = oForm.sex.value;
+
+			var oTr = document.createElement('tr');
+			var oTd = document.createElement('td');
+
+			var oCheckBox = document.createElement('input');
+			oCheckBox.type = 'checkbox';
+			oCheckBox.name = 'chk';
+			oTd.appendChild(oCheckBox);
+			oTr.appendChild(oTd);
+
+			oTd = document.createElement('td');
+			oTd.innerHTML = strId;
+			oTr.appendChild(oTd);
+
+			oTd = document.createElement('td');
+			oTd.innerHTML = strName;
+			oTr.appendChild(oTd);
+
+			oTd = document.createElement('td');
+			oTd.innerHTML = strAge;
+			oTr.appendChild(oTd);
+
+			oTd = document.createElement('td');
+			oTd.innerHTML = strSex;
+			oTr.appendChild(oTd);
+
+			oTbody.appendChild(oTr);
+
+		}
+
+
+		oForm.all.onclick = function(){
+
+			if(oForm.all.checked){
+				for(var i=0; i<oForm.chk.length; i++){
+					oForm.chk[i].parentNode.parentNode.style.background = 'yellow';
+					oForm.chk[i].checked = true;
+				}
+			}else{
+				for(var i=0; i<oForm.chk.length; i++){
+					oForm.chk[i].parentNode.parentNode.style.background = '';
+					oForm.chk[i].checked = false;
+				}
+			}
+
+		}
+
+		var aChk = oForm.chk;
+		for(var i=0; i<aChk.length; i++){
+			if(aChk[i].checked){
+				aChk[i].parentNode.parentNode.style.background = 'yellow';
+
+			}else{
+				aChk[i].parentNode.parentNode.style.background = '';
+			}
+		}
+
+		var aTrs = oTab.tBodies[0].rows;
+		for(var i=0; i<aTrs.length; i++){
+			aTrs[i].onclick = function(){
+				// alert(3)
+				// alert(this.children[0].children[0].checked)
+				if(this.children[0].children[0].checked){
+					// alert(4)
+					this.children[0].children[0].checked = false;
+					this.style.background = '';
+
+				}else{
+					// alert(5)
+					this.children[0].children[0].checked = true;
+					this.style.background = 'yellow';
+
+				}
+
+				// if(this.children[0].children[0].checked){
+				// 	alert(4)
+				// 	this.children[0].children[0].checked = false;
+				// 	this.style.background = '';
+
+				// }else{
+				// 	alert(5)
+				// 	this.children[0].children[0].checked = true;
+				// 	this.style.background = 'yellow';
+
+				// }
+			}
+		}
+
+		oForm.del.onclick = function(){
+			// alert(6)
+
+			var aChk = oForm.chk;
+
+
+
+
+			// 	console.log(aChk.length);
+			// for(var i=0; i<aChk.length; i++){
+			// 	console.log(i + ' ' +aChk[i].checked);
+			// 	if(aChk[i].checked){
+			// 		oTab.tBodies[0].removeChild(aChk[i].parentNode.parentNode);
+			// 	}
+			
+			// }
+
+		}
+
+	}
+
+</script>
+</head>
+<body>
+	<form id='form'>
+		<input type="text" name='id'/>
+		<input type="text" name='name'/>
+		<input type="text" name='age'/>
+		<input type="text" name='sex'/>
+		<input type="button" name='btn' value='Add'/>
+		<input type="button" name='del' value='Delete'/>
+		<table id='table'>
+			<thead>
+				<tr>
+					<th><input type="checkbox" name='all' /></th>
+					<th>编号</th>
+					<th>姓名</th>
+					<th>年龄</th>
+					<th>性别</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+	</form>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript">
+	window.onload = function(){
+
+		var oBtn = document.getElementById('btn');
+		// getElementsByClassName(document.body, 'div', 'box,box1');
+
+		var oUl1 = document.getElementById('ul1');
+		
+		var arr = getElementsByClassName(document, '*', 'box1');
+
+		for(var i=0; i<arr.length; i++){
+			arr[i].style.background = 'yellow';
+		}
+	}
+
+	function getElementsByClassName(parent, tagname, className){
+
+		var aEls = parent.getElementsByTagName(tagname);
+		var arr = [];
+
+		for(var i=0; i<aEls.length; i++){
+
+			var aClassName = aEls[i].className.split(' ');
+			for(var j=0; j<aClassName.length; j++){
+
+				
+				if( aClassName[j] == className){
+					arr.push(aEls[i]);
+					break;
+				}
+
+			}
+
+			
+		}
+
+		return arr;
+
+	}
+</script>
+</head>
+<body>
+	<ul id='ul1'>
+		<li class="box">1111</li>
+		<li>2222</li>
+		<li class="box box2">3333</li>
+		<li>444</li>
+		<li class="box1">5555</li>
+	</ul>
+	<div class="box1">666</div>
+	<input type="button" value='click' id='btn'/>
+</body>
+</html>

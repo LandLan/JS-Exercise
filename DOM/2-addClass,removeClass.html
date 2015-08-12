@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript">
+	window.onload = function(){
+
+		var oDiv1 = document.getElementById('div1');
+		addClass(oDiv1, 'box1');
+
+
+		var oDiv2 = document.getElementById('div2');
+		removeClass(oDiv2, 'box1');
+
+		function addClass(obj, className) {
+
+			if(obj.className == ''){
+				obj.className = className;
+			}else{
+				var aClassName = obj.className.split(' ');
+				var _index = aIndexOfClassName(aClassName, className);
+
+				if(_index == -1){
+					obj.className += ' ' + className;
+				}
+			}
+
+
+		}
+
+		function removeClass( obj, className ){
+
+			if(obj.className != ''){
+				var aClassName = obj.className.split(' ');
+				var _index = aIndexOfClassName(aClassName, className);
+				if(_index != -1){
+					aClassName.splice(_index, 1);
+					obj.className = aClassName.join(' ');
+				}
+			}
+
+		}
+
+		function aIndexOfClassName(arr, className) {
+			for(var i=0; i<arr.length; i++){
+				if(arr[i] == className){
+					return i;
+				}
+			}
+
+			return -1;
+		} 
+	}
+
+	
+</script>
+</head>
+<body>
+
+	<div id='div1' class='box1'>div1</div>
+
+	<div id='div2' class='box box1 box2'>div1</div>
+
+</body>
+</html>

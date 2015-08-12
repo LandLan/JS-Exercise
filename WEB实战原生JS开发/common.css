@@ -1,0 +1,25 @@
+/* reset  start */
+html, body {overflow: hidden; height: 100%;}
+body, div, h1, h2, h3, h4, p, ul, ol {padding: 0; margin: 0; font: 14px "微软雅黑";}
+li {list-style: none;}
+img {border: none; display: block; vertical-align: top;}
+a {text-decoration: none;}
+a:active {color:#009ee0;}
+/* reset  end */
+
+/* common  start */
+.clear {zoom:1;}
+.clear:after {content: ""; display: block; clear: both;}
+/* common  end */
+
+/* frame  start  */
+#main {width: 100%; height: 100%;}
+#header {width: 100%; height: 80px; background: #fff;}
+#headerMain {width: 1100px; height: 100%; margin: 0 auto;}
+#logo {float: left; margin-top: 30px;}
+#nav {float: right; margin-top: 50px;}
+#nav li {float: left; margin-left: 40px; position: relative;}
+#nav li .up {color: #000; position: absolute; left: 0; top: 0; width: 0%; overflow: hidden; transition:.5s width;}
+#nav li:hover .up {width: 100%;}
+#content {width:100%; height:300px; background:blue;}
+/* frame  end  */
