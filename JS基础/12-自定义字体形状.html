@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	body,p, div, textarea, input, select {padding:0; margin:0;}
+	#wrap { width: 440px; height: 400px; border:1px solid #000; margin:20px auto;}
+	#showBox{width: 400px; height: 120px;border:1px solid #000; margin: 20px; }
+	#showBox .balloom {background:url(12-img/balloom.png) no-repeat 5px 5px; width: 30px; height:30px; display: block;float:left; text-align: center; line-height: 30px; color: #333;}
+	#showBox .heart {background:url(12-img/heart.png) no-repeat 5px 5px; width: 30px; height:30px; display: block;float:left; text-align: center; line-height: 30px; color: #333;}
+	#showBox .cloud {background:url(12-img/cloud.png) no-repeat 5px 5px; width: 30px; height:30px; display: block;float:left; text-align: center; line-height: 30px; color: #333;}
+	textarea {width: 400px; height: 120px; resize:none;margin: 20px; background:#fff; border:1px solid #000;}
+	select { margin-left:20px;}
+	input {margin-left:20px;}
+	
+</style>
+<script type="text/javascript">
+	
+	window.onload = function(){
+
+		var oBtn = document.getElementById('btn');
+		var oContent = document.getElementById('content');
+		var oSelect = document.getElementById('selectBox');
+		var oShow = document.getElementById('showBox');
+
+		oBtn.onclick = function(){
+			var sel = oSelect.value;
+			var str = oContent.value;
+			var bg = ['balloom','heart','cloud'];
+			// alert(str);
+			var arr = str.split('');
+			var strHtml = '';
+			for(var i=0; i<arr.length; i++){
+				strHtml += '<span class="'+bg[sel]+'">'+arr[i]+'</span>'
+			}
+			oShow.innerHTML = strHtml;
+			oContent.value = '';
+		}
+
+	}
+
+</script>
+</head>
+<body>
+	<div id='wrap'>
+		<div id="showBox">
+			<!-- <span class='balloom'>a</span>
+			<span class='balloom'>c</span> -->
+		</div>
+		<select id="selectBox">
+			<option value="0">气球字体</option>
+			<option value="1">红心字体</option>
+			<option value="2">云字体</option>
+		</select>
+		<textarea id="content" ></textarea>
+		<input id='btn' type="button" value='确定'/>
+	</div>
+</body>
+</html>

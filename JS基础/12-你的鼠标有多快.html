@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	
+	body, div, h2, p, input {padding:0; margin:0;}
+	body {background:#CBF2E3;}
+	#wrap { width:960px; height:600px; margin:0 auto; border: 1px solid #000; position:relative;}
+
+	h2{width:960px; text-align:center; line-height:50px; font-size: 22px;}
+	p{width:960px; text-align:center; line-height:30px; font-size: 16px;}
+	input { margin-left: 430px; }
+
+	#content {width:824px; position:absolute; top: 120px; left: 70px;}
+	#left {width: 97px; height:150px; border:1px solid #2DB05D; float:left; background:#E2EDD5;}
+	#left p {width: 97px; line-height: 30px; font-size:16px; margin-top: 20px;}
+	#right {width: 724px; height: 460px; border:1px solid #2DB05D; margin-left:-1px; float:left; background:#fff; position:relative;}
+	#right img {position:absolute; top:0; left:0; display:none;}
+
+
+</style>
+<script type="text/javascript" src='common.js'></script>
+<script type="text/javascript">
+	window.onload = function(){
+
+		var oContent = document.getElementById('content');
+		var oRight = document.getElementById('right');
+		var oBtn = document.getElementById('btn');
+		var oScore = document.getElementById('score');
+		var oLose = document.getElementById('lose');
+
+		var score = 0;
+		var lose = 0;
+		var speed = 2;
+		oBtn.onclick = function(){
+			this.value = '游戏中...';
+			this.disabled = true;
+			drop();
+		}
+
+		function drop( endFn){
+			var oImg = oRight.getElementsByTagName('img')[0];
+
+			oImg.src = '12-img/'+Math.ceil(Math.random() * 14)+'.png';
+			var randomLeft = Math.round(Math.random() * 700);
+			// oImg.style.top = '0px';
+			oImg.style.top = '0px';
+			oImg.style.left = randomLeft + 'px';
+			oImg.style.display = 'block';
+			// console.log(oImg.src);
+			// alert(oImg);
+			doMove(oImg, 'top', speed, 460, function(){
+				var top = parseInt( getStyle(oImg, 'top') );
+				// console.log(top);
+				if(top == 460){
+					lose++;
+					oLose.innerHTML = lose;
+
+					var strContentPos = parseInt( getStyle(oContent, 'top') );
+					shake(oContent,'top', strContentPos ,4);
+
+					// console.log(lose == 2);
+					if(lose == 10){
+						clearInterval(oImg.timer);
+						oBtn.value = '开始游戏';
+						oBtn.disabled = false;
+						oImg.style.display = 'none';
+					}else{
+						var randomLeft = Math.round(Math.random() * 700);	
+						oImg.style.top = '0px';
+						oImg.style.left = randomLeft + 'px';
+						drop();
+					}
+				}
+			});
+
+			oImg.onmouseover = function(){
+				clearInterval(oImg.timer);
+				var pos = parseInt( getStyle(oImg, 'left') );
+				oImg.src = '12-img/qq.png';
+				shake(oImg,'left', pos ,10, function(){
+					
+					score++;
+					oScore.innerHTML = score;
+
+					if(score % 4 == 0){
+						speed = speed + 1;						
+					}
+
+					var randomLeft = Math.round(Math.random() * 700);
+					oImg.style.top = '0px';
+					oImg.style.left = randomLeft + 'px';
+					drop();
+				});
+
+
+			}
+
+			
+		}
+
+	}
+</script>
+</head>
+<body>
+	<div id='wrap'>
+		<h2>你的鼠标有多快？</h2>
+		<p>游戏说明：点击“开始游戏”，随机掉下QQ表情，点中它，千万别让它掉下去！！</p>
+		<input id='btn' type='button' value='开始游戏' />
+		<div id='content'>
+			<div id='left'>
+				<p>得分：<span id='score'>0</span>分</p>
+				<p>失分：<span id='lose'>0</span>分</p>
+			</div>
+			<div id='right'>
+				<img src="12-img/1.png"/>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

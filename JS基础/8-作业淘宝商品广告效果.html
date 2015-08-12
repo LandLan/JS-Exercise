@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+body,ul,div,img,h2,p{padding:0; margin:0;}
+li{list-style:none;}
+img{border:none;}
+
+#wrap {width:500px; height:262px; border:1px solid #F33; margin:50px auto; position:relative;}
+
+#ul1, #ul2{ width:100px;position:absolute;}
+#ul1 li, #ul2 li{ width:100px; line-height: 30px; text-align:center; border:1px solid #F66; margin: 5px 0;}
+#ul1 li.active, #ul2 li.active{background:#F9C;}
+#ul1{left:5px; top:0;}
+#ul2{right:5px; top:0;}
+
+#middle{ width: 280px; height:250px; margin:0 auto; margin-top:5px; position:relative; }
+#middle .bg1{height:30px; width:280px; background: #F69; opacity:0.3;position:absolute; bottom:50px;}
+#middle img{ width: 280px; height:250px; }
+#middle h2{line-height:30px; width:280px; color:#F00; font-size:20px; position:absolute; bottom:50px; text-indent: 5px; }
+#middle .bg2{height:30px; width:280px; background: #ccc; opacity:0.3; position:absolute; bottom:5px;}
+#middle p{ width:280px; line-height:30px; color:#eee; font-size:14px; position:absolute; bottom:5px; text-indent: 5px;}
+#middle span{font-size:20px; font-weight:bold;}
+
+
+</style>
+
+<script>
+
+	window.onload = function(){
+	
+		var aaText = [['111','222','333','444','555','666','777'],['888','999','100','101','102','103','104']];
+		
+		var aUl = document.getElementsByTagName('ul');
+		
+		var aaLi = document.getElementsByTagName('li');
+		
+		var timer = null;
+		
+		var aLi1 = aUl[0]
+		var aLi = null;
+		
+		var oUlIndex = 0;
+		var oldUlIndex = 0;
+		var index = 0;
+		var oldIndex = 0;
+		
+		for(var i=0; i<2; i++){
+			var str = '';
+			for(var j=0; j < aaText[i].length; j++){
+			
+				str += '<li>'+aaText[i][j]+'</li>';	
+				
+			}
+			aUl[i].innerHTML = str;
+		}
+		
+		
+		for(var i=0; i<aaLi.length; i++){
+			
+			aaLi[i].onmouseover = function(){
+				clearInterval(timer);
+				for(var i=0; i<aaLi.length; i++){
+					aaLi[i].className = '';
+				}
+				this.className = 'active';	
+				
+			}
+			
+			aaLi[i].onmouseout = function(){
+			
+				this.className = '';	
+				moveRound();
+			}
+		}
+		
+		
+		moveRound();
+		
+		
+		function moveRound(){
+			
+			timer = setInterval(function(){
+			//console.log(index);
+			aLiOld = aUl[oldUlIndex].getElementsByTagName('li');
+			aLi = aUl[oUlIndex].getElementsByTagName('li');
+			aLiOld[oldIndex].className = '';	
+			aLi[index].className = 'active';	
+			oldIndex = index;
+			//index++;
+			oldUlIndex = oUlIndex;
+			if(index == aLi.length-1 && oUlIndex == 0){
+				//index = 0;	
+				oUlIndex = 1;
+				
+			}else if(index == 0 && oUlIndex==1){
+				oUlIndex = 0;
+			}else{
+				index = oUlIndex==0?index+1:index-1;
+			}
+		}, 1000);
+				
+		}
+		
+	}
+
+
+
+</script>
+
+</head>
+
+<body>
+
+<div id='wrap'>
+
+	<ul id="ul1"></ul>
+	<div id='middle'>
+    	<img src="pic.jpg" alt=""  />
+        <div class="bg1"></div>
+        <div class="bg2"></div>
+        <h2>电子产品</h2>
+        <p><span>100</span>元起</p >
+    </div>
+	<ul id="ul2"></ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	
+	body,ul,li,h2 {padding:0; margin:0;}
+	li{list-style:none;}
+	a {text-decoration:none;}
+	#header {margin:50px auto; width:500px; height:40px; border:1px solid #000;}
+	#nav {width:500px; height:40px;}
+	#nav div {float:left; height:40px;}
+	#nav a{display:block; line-height:40px;padding:0 10px; font-size:14px; color:#000; border: 1px solid #000;}
+	ul{ height: 40px; border:1px solid #000; margin-top: 5px; display:none;}
+	ul li {float:left; line-height:40px;}
+	ul a {display:block; line-height:40px; padding:0 10px; font-size:14px; color:#000; border: 1px solid #000;}
+	ul a:hover {text-decoration:underline;}
+</style>
+<script type="text/javascript">
+	
+	window.onload = function(){
+		var oNav = document.getElementById('nav');
+		var oHeader = document.getElementById('header');
+		
+		var aA = oNav.getElementsByTagName('a');
+		var aUl = oHeader.getElementsByTagName('ul');
+		
+		var timer = null;
+		
+		var oldIndex = 0;
+		for(var i=0; i<aA.length; i++){
+			aA[i].index = i;
+			aA[i].onmouseover = function(){
+				clearTimeout(timer);
+				aA[oldIndex].style.backgroundColor = '';
+				aUl[oldIndex].style.display = 'none';
+				
+				this.style.backgroundColor = '#FCC';
+				aUl[this.index].style.display = 'block';	
+			}
+			
+			aA[i].onmouseout = function(){
+				
+				var _this = this;
+				oldIndex = this.index;
+				timer = setTimeout(function(){
+					aA[_this.index].style.backgroundColor = '';
+					aUl[_this.index].style.display = 'none';	
+				}, 200);
+			}
+			
+			aUl[i].onmouseover = function(){
+				
+				clearTimeout(timer);
+				
+				this.style.display = 'block';	
+			}
+			
+			aUl[i].index = i;
+			aUl[i].onmouseout = function(){
+				var _this = this;
+				timer = setTimeout(function(){
+					aA[_this.index].style.backgroundColor = '';
+					aUl[_this.index].style.display = 'none';	
+				}, 200);
+			}
+		}
+		
+		
+
+	}
+
+</script>
+</head>
+
+<body>
+
+	<div id="header">
+		<div id="nav">
+			<div><a href="javascript:">首页</a></div>
+			<div><a href="javascript:">关于我们</a></div>
+			<div><a href="javascript:">作品</a></div>
+			<div><a href="javascript:">博客</a></div>
+		</div>
+		<ul id="home">
+			<li><a href="#">最近更新</a></li>
+			<li><a href="#">活动</a></li>
+			<li><a href="#">报名试听</a></li>
+			<li><a href="#">学员反馈</a></li>
+		</ul>
+		<ul id="aboutUs">
+			<li><a href="#">妙味课堂</a></li>
+			<li><a href="#">培训方式</a></li>
+			<li><a href="#">培训理念</a></li>
+			<li><a href="#">联系我们</a></li>
+		</ul>
+		<ul id="showcase">
+			<li><a href="#">般固</a></li>
+			<li><a href="#">MATRIX</a></li>
+			<li><a href="#">留学E网</a></li>
+			<li><a href="#">ECMall</a></li>
+		</ul>
+		<ul id="blog">
+			<li><a href="#">JS教程</a></li>
+			<li><a href="#">弹出层效果</a></li>
+			<li><a href="#">3D球面标签云</a></li>
+			<li><a href="#">Windows计算器</a></li>
+		</ul>
+	</div>
+
+</body>
+</html>

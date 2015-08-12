@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	
+	body,div,ul,li,img {padding:0; margin:0;}
+	li {list-style:none;}
+	img {border:none;}
+	
+	#tab {width:500px; height:300px; border:1px solid #000; margin:0 auto;}
+	
+	.nav {width:200px; height:30px; border:1px solid #000; }
+	.nav li {line-height:30px; float:left; padding:0 15px; border:1px solid #000; }
+	.nav .active {background:#F96;}
+
+	.box {width:400px; height: 250px; border:1px solid #000; display:none;}
+	.box img{width:300px; height:250px; display:block; float:left;}
+	.box ul {float:left;width:100px;}
+	.box li {width:98px; text-align:center; padding:5px 0; border:1px solid #000;}
+	.box .active{background:#0CF;}
+</style>
+<script type="text/javascript">
+	
+	window.onload = function(){
+		
+		var oTab = document.getElementById('tab');
+		var oNav = oTab.getElementsByTagName('ul')[0];
+		var aNavLi = oNav.getElementsByTagName('li');
+		var aDiv = oTab.getElementsByTagName('div');
+		
+		var aaImgUrls = [
+			['5-img/5-1.jpg','5-img/5-2.jpg','5-img/5-3.jpg'],
+			['5-img/5-4.jpg','5-img/5-5.jpg','5-img/5-6.jpg']
+		];
+		
+	
+		var timer= null;
+		
+		
+			
+		var num = 0;
+		var index = 0;
+		var tabindex = 0;
+		timer = setInterval(function(){
+			
+			
+			var oImg = aDiv[tabindex].getElementsByTagName('img')[0];
+			var oUl = aDiv[tabindex].getElementsByTagName('ul')[0];
+			var aLi = oUl.getElementsByTagName('li');
+			
+			if(num > aLi.length-1){
+				//console.log(tabindex);
+				num = 0; 
+				aNavLi[tabindex].className = '';
+				aDiv[tabindex].style.display = 'none';
+				tabindex++;
+				if(tabindex > aDiv.length-1){
+					tabindex = 0;
+				}
+				aNavLi[tabindex].className = 'active';
+				aDiv[tabindex].style.display = 'block';
+			}
+			
+			aLi[index].className = '';
+			
+			aLi[num].className = 'active';
+			index = num;
+			num++;
+			
+			//num %= aLi.length;
+			
+		}, 1000);
+		
+	
+	}
+	
+	
+</script>
+</head>
+<body>
+	<div id="tab">
+		
+		<ul class='nav'>
+			<li class="active">菜单一</li>
+			<li>菜单二</li>
+		</ul>
+		<div class='box' style="display:block;">
+			<img src="5-img/5-1.jpg" />
+			<ul>
+				<li class="active">图片一</li>
+				<li>图片二</li>
+				<li>图片三</li>
+			</ul>
+		</div>
+        
+		<div class='box'>
+			<img src="5-img/5-4.jpg" />
+			<ul>
+				<li class="active">图片四</li>
+				<li>图片五</li>
+				<li>图片六</li>
+			</ul>
+		</div>
+
+	</div>
+</body>
+</html>

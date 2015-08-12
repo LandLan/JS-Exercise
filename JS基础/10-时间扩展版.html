@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	body,ul,li, div, img {padding:0; margin:0;}
+	#ul1{margin: 200px auto;width:976px; height:172px; position:relative; overflow:hidden;}
+	li{list-style:none; width:122px; height:344px; position:absolute; top:0;}
+	img{border:none; width: 122px; height:172px; }
+	
+
+</style>
+<script type="text/javascript" src="miaov.js"></script>
+<script type="text/javascript">
+	
+	window.onload = function(){
+		var aLi = document.getElementsByTagName('li');
+		for(var i=0; i<aLi.length; i++){
+			aLi[i].style.left = i * 122 + 'px';
+		}
+		
+		var oNow = new Date();
+		var oHour = toTwo(oNow.getHours());
+		var oMin = toTwo(oNow.getMinutes());
+		var oSec = toTwo(oNow.getSeconds());
+
+		var str = oHour + ":" + oMin + ":" + oSec;
+
+		for(var i=0; i<aLi.length; i++){
+			var aImg = aLi[i].getElementsByTagName('img');
+			aImg[0].src = '10-img/' + str.charAt(i) + '.jpg';
+		}
+
+		var timer = null;
+		
+
+		for(var i=0; i<aLi.length; i++){
+			changeTime(aLi[i], i);
+		}
+
+		function changeTime(obj, idx){
+			var oldNum = 0;
+			timer = setInterval(function(){
+
+				var oNow = new Date();
+				var oHour = toTwo(oNow.getHours());
+				var oMin = toTwo(oNow.getMinutes());
+				var oSec = toTwo(oNow.getSeconds());
+
+				var str = oHour + ":" + oMin + ":" + oSec;
+
+				var aImg = obj.getElementsByTagName('img');
+				
+				var pos = parseInt(getStyle(obj, 'top'));
+
+				if(str.charAt(idx) != ':' && oldNum != str.charAt(idx)){
+					if( pos < 172){
+						aImg[0].src = aImg[1].src;
+						aImg[1].src = '10-img/' + str.charAt(idx) + '.jpg'; 
+						
+						obj.style.top = '0px';
+						doMove(obj, 'top', 20, -172, function(){
+							clearInterval(obj.timer);
+						});
+					}else{
+						aImg[1].src = '10-img/' + str.charAt(idx) + '.jpg'; 
+
+						doMove(obj, 'top', 20, -172, function(){
+							clearInterval(obj.timer);
+						});
+					}
+					oldNum = str.charAt(idx);
+				}
+				
+			}, 1000);
+
+		}
+
+	}
+
+	function toTwo(num){
+		return num > 9 ? ''+num : "0" + num;
+	}
+
+</script>
+</head>
+<body>
+	<ul id='ul1'>
+		<li>
+			<img src="10-img/0.JPG" alt="" />
+			<img src="10-img/0.JPG" alt="" />
+		</li>
+		<li>
+			<img src="10-img/0.JPG" alt="" />
+			<img src="10-img/0.JPG" alt="" />
+		</li>
+		<li>
+			<img src="10-img/colon.JPG" alt="" />
+		</li>
+		<li>
+			<img src="10-img/0.JPG" alt="" />
+			<img src="10-img/0.JPG" alt="" />
+		</li>
+		<li>
+			<img src="10-img/0.JPG" alt="" />
+			<img src="10-img/0.JPG" alt="" />
+		</li>
+		<li>
+			<img src="10-img/colon.JPG" alt="" />
+		</li>
+		<li>
+			<img src="10-img/0.JPG" alt="" />
+			<img src="10-img/0.JPG" alt="" />
+		</li>
+		<li>
+			<img src="10-img/0.JPG" alt="" />
+			<img src="10-img/0.JPG" alt="" />
+		</li>
+	</ul>
+</body>
+</html>

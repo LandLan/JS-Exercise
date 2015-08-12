@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	body, div, p, img, textarea {padding:0; margin:0;}
+	#wrap {width:700px; height: 300px; position:relative; border: 15px solid #ccc;}
+	p { width: 270px; height: 200px; position:absolute; border: 2px solid #ccc;}
+	#left {top: 10px; left: 10px; }
+	#left textarea {background:#F6F3D0; width: 270px; height: 200px; border:none; resize: none;}
+	#right {top: 10px; right: 10px;}
+	#right textarea {background:#C8F6FC;  width: 270px; height: 200px; border:none; resize: none;}
+	a {opacity:100; text-decoration:none; display:block; width: 100px; line-height: 40px; position:absolute; top: 10px; left:300px; background:#F66D3C; color: #fff; text-align:center;}
+	span {display:block; width: 100px; line-height: 40px; position:absolute; top: 60px; left:300px; text-align:center;}
+	img {border:none; display:block; width: 16px; height: 16px; position:absolute; top: 120px; left:340px; display:none; }
+</style>
+<script type="text/javascript" src='common.js'></script>
+<script type="text/javascript">
+	window.onload = function(){
+		var oBtn = document.getElementById('btn');
+		var oPleft = document.getElementById('left');
+		var oPright = document.getElementById('right');
+		var oTextarea = document.getElementById('text');
+		var oTextareaB = document.getElementById('read');
+		var oSpan = document.getElementsByTagName('span')[0];
+		var oImg = document.getElementsByTagName('img')[0];
+
+		//alert(oText);
+
+		oBtn.onclick = function(){
+			
+			var oText = document.getElementById('text').value;	
+			var tempText = oText;
+			//alert(oText);
+			var totalCount = oText.length;
+			oTextareaB.value = '';
+			var doCount = 0;
+			var timer = null;
+			timer = setInterval(function(){
+				var strRight = oTextareaB.value;
+
+				var tempA = tempText.substring(0,1);
+				var tempB = tempText.substring(1);
+				tempText = tempB;
+				//console.log(tempB);
+				if(!tempText){
+					//console.log("stop");
+					
+					clearInterval(timer);
+					
+
+				}
+				oTextareaB.value += tempA;
+				oTextarea.value = tempB;
+
+				var doCount = oTextareaB.value.length;
+				var count = doCount +'/' + totalCount;
+				oSpan.innerHTML = count;
+				oImg.style.display = 'block';
+
+				opacity(oBtn, 5, 30);
+				if(totalCount - doCount < 10){
+					clearInterval(oBtn.opacity);
+					opacity(oBtn, 5, 100, function(){
+						oImg.style.display = 'none';
+					});
+
+				}
+
+			}, 150);
+
+
+
+		}
+
+	}
+</script>
+</head>
+<body>
+	<div id='wrap'>
+		<p id='left'>
+			<textarea id='text'></textarea>
+		</p>
+		<p id='right'>
+			<textarea id='read' disabled></textarea>
+		</p>
+		<a id='btn' href='javascript:;'>把文字右移</a>
+		<span>0/0</span>
+		<img src="3-img/loader_ico.gif"  alt="" />
+	</div>
+</body>
+</html>

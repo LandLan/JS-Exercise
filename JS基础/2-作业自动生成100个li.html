@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	body,ul,li {padding:0; margin:0;}
+	ul{ width:620px; margin: 50px auto;}
+	li {list-style:none; width:50px; height:50px; border:1px solid #000; float:left; line-height:50px; text-align: center; margin:5px 5px;}
+	
+	.red {background:#f00;}
+	.green {background:#0f0;}
+	.blue {background:#0ff;}
+	.yellow {background:#ff0};
+	
+</style>
+<script>
+	window.onload = function(){
+		
+		var oBtn = document.getElementById('btn1');
+		
+		oBtn.onclick = function(){
+			
+			var oUl = document.getElementById('ul1');
+			var aBgColors = ['red','green','blue','yellow'];
+			
+			var str = '';
+			for(var i=0; i<100; i++){
+				str += '<li';
+				
+				//if(i % 4){
+					var a = i % 4;
+					//alert(a);
+					str +=  ' class="' + aBgColors[a]  +'">';		
+				//}
+				
+				str += i;
+				str += '</li>';
+				
+			}
+			console.log(str);
+			oUl.innerHTML = str;
+		}
+		
+				
+	}
+</script>
+</head>
+
+<body>
+	<input id="btn1" type='button' value="自动生成100个li" />
+	<ul id="ul1">
+    
+    </ul>
+</body>
+</html>

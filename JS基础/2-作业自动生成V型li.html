@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	ul,li{padding:0; margin:0;}
+	ul {position: relative; height:250px; width:250px; margin:50px auto; border:1px solid #000;}
+	li{list-style:none; width:50px; height:50px; background:red; color:#fff; line-height:50px; text-align:center; position:absolute;}
+	
+</style>
+
+<script>
+	
+	window.onload = function(){
+		
+		var oUl = document.getElementById('ul1');
+		var oBtn = document.getElementById('btn1');
+	
+		var str = '';
+		
+		for(var i=0; i<5; i++){
+			
+			str += '<li>'+i+'</li>';	
+			
+		}
+		
+		oUl.innerHTML = str;
+
+		var count = 0;
+		oBtn.onclick = function(){
+			
+			var aDirecs = ['down','left', 'top', 'right'];
+			
+			if(count == 4){
+				count = 0;
+			}
+			
+			vType(aDirecs[count]);
+			count++;
+			
+		}
+		
+		function vType (w){
+		
+			var aLis = oUl.getElementsByTagName('li');
+			var size = aLis.length;
+			
+			
+			if(w == 'top'){
+				var c = 1;
+				for(var m=0; m<size; m++){
+					var a = Math.floor(size / 2);  // 2
+					if(m < size / 2){
+						aLis[m].style.top = 50*(m*(-1)+a) +'px';
+					}else{
+						aLis[m].style.top = 50*(m-a*c) +'px';	
+							
+					}
+					
+					aLis[m].style.left = 50*m +'px';	
+					
+					
+				}
+			
+				
+			}else if(w == 'down'){
+				
+				var c = 1;
+				for(var m=0; m<size; m++){
+					var a = Math.floor(size / 2);
+					console.log(a);
+					if(m < size / 2){
+						aLis[m].style.top = 50*m +'px';	
+					}else{
+						aLis[m].style.top = 50*(m-a*c) +'px';
+						c++;	
+					}
+					
+					aLis[m].style.left = 50*m +'px';		
+					
+				}
+				
+			}else if(w == 'left'){
+				
+				var c = 1;
+				for(var m=0; m<size; m++){
+					var a = Math.floor(size / 2);
+					console.log(a);
+					if(m < size / 2){
+						aLis[m].style.left = 50*m +'px';	
+					}else{
+						aLis[m].style.left = 50*(m-a*c) +'px';
+						c++;	
+					}
+					
+					aLis[m].style.top = 50*m +'px';		
+					
+				}
+				
+			}else if(w == 'right'){
+				var c = 1;
+				for(var m=0; m<size; m++){
+					var a = Math.floor(size / 2);  // 2
+					if(m < size / 2){
+						aLis[m].style.left = 50*(m*(-1)+a) +'px';
+					}else{
+						aLis[m].style.left = 50*(m-a*c) +'px';	
+							
+					}
+					
+					aLis[m].style.top = 50*m +'px';	
+					
+					
+				}
+			
+				
+			}
+			
+		}
+		
+	
+	}
+	
+</script>
+
+</head>
+
+<body>
+	<input id="btn1" type="button" value="按钮" />
+	<ul id="ul1">
+    
+    
+    </ul>
+
+</body>
+</html>

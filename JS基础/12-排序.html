@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	
+	body, div, ul ,li ,img, h2 {padding:0; margin:0;}
+	#wrap { width:680px; height:320px; margin: 20px auto; border: 1px solid #000;  position:relative;}
+	a {text-decoration:none; display:block; position:absolute; top:20px; width:120px; height: 40px; background:#56B954;color:#fff; text-align:center; line-height:40px;}
+	#normal {left:150px;}
+	#abnormal{left:300px;}
+	ul {width: 680px;position:absolute; top: 80px; margin-left:10px;}
+	li {list-style:none; width:150px; height:100px; float:left; margin-right:20px; margin-bottom: 20px;background:#ddd; }
+	img{width: 150px; height:80px; border:none; display:block;}
+	h2{ font-size:14px; height: 20px; text-align:center; color:#2A5A5D;}
+</style>
+<script type="text/javascript">
+	
+	window.onload = function(){
+
+		 var json = {
+		 	'url': ['5-img/5-1.jpg','5-img/5-2.jpg','5-img/5-3.jpg','5-img/5-4.jpg','5-img/5-5.jpg','5-img/5-6.jpg','5-img/5-7.jpg','5-img/5-8.jpg'],
+		 	'text':['1-温馨办公','2-游戏桌面','3-汽车摇滚','4-狭路相逢','5-棒球小子','6-球鞋动力','7-游戏官网','8-指尖社区']
+		 };
+
+		 var oUl = document.getElementById('ul1');
+		 var str = '';
+
+		 for(var i=0; i<json.url.length; i++){
+		 	str += '<li><img src="'+json.url[i]+'" alt="" /><h2>'+json.text[i]+'</h2></li>' ;
+		 }
+		 oUl.innerHTML = str;
+
+		 var onOff = true;
+		 var aBtn = document.getElementsByTagName('a');
+		 var aUrl = json.url;
+		 var aText = json.text;
+		 aBtn[0].onclick = function() {
+		 	var str = '';
+		 	if(onOff){
+		 		this.innerHTML = '从小到大';
+
+		 		aUrl = json.url;
+				aText = json.text;
+
+				json.url = aUrl.sort(function(a, b){
+					var aaUrl = parseInt(a.slice(a.length-5, a.length-4));
+					var bbUrl = parseInt(b.slice(b.length-5, b.length-4));
+					// console.log(aUrl + '-'+bUrl);
+					// console.log(bUrl-aUrl);
+					return bbUrl-aaUrl;
+				});
+				json.text = aText.sort(function(a, b){
+					var aaText = parseInt(a);
+					var bbText = parseInt(b);
+					return bbText-aaText;
+				});
+				// console.log('small end'+json.url);
+				
+				for(var i=0; i<json.url.length; i++){
+			 	str += '<li><img src="'+json.url[i]+'" alt="" /><h2>'+json.text[i]+'</h2></li>' ;
+				}
+				oUl.innerHTML = str;
+
+		 	}else{
+				this.innerHTML = '从大到小';
+				// console.log(json.url);
+				aUrl = json.url;
+				aText = json.text;
+				//console.log(json.url);
+				json.url = aUrl.sort(function(a, b){
+					var aaUrl = parseInt(a.slice(a.length-5, a.length-4));
+					var bbUrl = parseInt(b.slice(b.length-5, b.length-4));
+					// console.log(aUrl + '-'+bUrl);
+					return aaUrl-bbUrl;
+				});
+				json.text = aText.sort(function(a, b){
+					var aaText = parseInt(a);
+					var bbText = parseInt(b);
+					return aaText-bbText;
+				});
+				// console.log('big end'+json.url);
+
+				for(var i=0; i<json.url.length; i++){
+			 	str += '<li><img src="'+json.url[i]+'" alt="" /><h2>'+json.text[i]+'</h2></li>' ;
+				}
+				oUl.innerHTML = str;
+
+		 	}
+		 	onOff = !onOff;
+		}
+
+		aBtn[1].onclick = function(){
+
+			var str = '';
+			aUrl = json.url;
+			aText = json.text;
+
+			json.url = aUrl.sort(function(a, b){
+				return Math.ceil(Math.random()*10) - 5;
+			});
+			json.text = aText.sort(function(a, b){
+				return Math.ceil(Math.random()*10) - 5;
+			});
+			// console.log('random end'+json.url);
+			for(var i=0; i<json.url.length; i++){
+			 	str += '<li><img src="'+json.url[i]+'" alt="" /><h2>'+json.text[i]+'</h2></li>' ;
+			}
+			oUl.innerHTML = str;
+
+		}
+	}
+
+</script>
+</head>
+<body>
+	<div id='wrap'>
+		<a id='normal' href='javascript:;'>从大到小</a>
+		<a id='abnormal' href='javascript:;'>随机排序</a>
+		<ul id='ul1'>
+
+			<!-- <li>
+				<img src="5-img/5-6.jpg" alt="" />
+				<h2></h2>
+			</li>
+			<li>
+				<img src="5-img/5-7.jpg" alt="" />
+				<h2></h2>
+			</li>
+			<li>
+				<img src="5-img/5-8.jpg" alt="" />
+				<h2></h2>
+			</li> -->
+		</ul>
+	</div>
+</body>
+</html>

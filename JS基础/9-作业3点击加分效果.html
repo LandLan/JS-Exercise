@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	body, div, p {padding:0; margin:0;}
+	#box { width:500px; height:50px; border:1px solid #333; position:relative; margin:450px auto 0; }
+  #box span { width:50px; height:50px; text-align:center; line-height:50px; font-size:30px; position:absolute; top:0; z-index:2; opacity:1; /* 一定得添加 */ }
+  #box p { margin:0; width:500px; width:0; height:50px; z-index:1; background:#60F; position:absolute; top:0; left:0; opacity:0; }
+    
+</style>
+
+<script src="common.js"></script>
+<script>
+
+	window.onload = function(){
+        var oDiv = document.getElementById('box');
+        var aSpan = document.getElementsByTagName('span');
+        var oP = document.getElementsByTagName('p')[0];
+      
+        for(var i=0; i<aSpan.length; i++){
+            aSpan[i].style.left = i*50 + 'px';
+        }
+
+        var timer = null;
+        oDiv.onclick = function(){
+            var num = 0;
+            var n = 0;
+            timer = setInterval(function(){
+              
+              doMove(aSpan[num],'top',13, -300);
+              opacity(aSpan[num], 2, 0);
+              
+
+              num++;
+              if(num == aSpan.length){
+                clearInterval(timer);
+              }
+
+
+              
+              
+            }, 30);
+
+            doMove(oP, 'width', 13, 500);
+            opacity( oP,  3, 100 , function() {
+              opacity( oP, 3, 0 , function() {
+                //oP.style.width = 0;
+                //alert(1);
+              });
+            });
+        }
+      
+      
+	}
+
+    function opacity(obj, num, target, endFn){
+        num = getStyle(obj, 'opacity')*100 < target ? num : -num;
+        clearInterval(obj.opacity);
+        obj.opacity = setInterval(function(){
+          var speed = parseInt(getStyle(obj, 'opacity')*100) + num;
+          if(speed > target && num > 0 || speed < target && num < 0){
+            speed = target;
+          }
+          obj.style.opacity = speed/100;
+          obj.style.filter = 'alpha(opacity='+speed+')';
+
+          if(speed == target){
+            clearInterval( obj.opacity );
+            endFn && endFn();
+          }
+
+        }, 20);
+    }
+</script>
+</head>
+
+<body>
+
+  <div id='box'>
+    <span>+1</span>
+    <span>+1</span>
+    <span>+1</span>
+    <span>+1</span>
+    <span>+1</span>
+    <span>+1</span>
+    <span>+1</span>
+    <span>+1</span>
+    <span>+1</span>
+
+    <p></p>
+  </div>
+
+</body>
+</html>

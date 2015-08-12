@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	body,div,ul,li,img {padding:0; margin:0;}
+	#wrap {width: 220px; height:240px; border:1px solid #000; margin:20px auto;}
+	ul{width:220px;height:225px;}
+	li{list-style:none; float:left; width:100px; height:50px;margin: 5px;overflow:hidden; position:relative;}
+	li div { width:100px; height:100px; position:absolute; top:0;left:0;}
+	img{width:100px; height:50px;}
+</style>
+<script type="text/javascript" src='common.js'></script>
+<script type="text/javascript">
+	window.onload = function(){
+		var arr = [['5-img/5-1.jpg','5-img/5-2.jpg'],
+				   ['5-img/5-3.jpg','5-img/5-5.jpg'],
+				   ['5-img/5-6.jpg','5-img/5-7.jpg'],
+				   ['5-img/5-8.jpg','5-img/5-5.jpg'],
+				   ['5-img/5-5.jpg','5-img/5-2.jpg'],
+				   ['5-img/5-7.jpg','5-img/5-1.jpg'],
+				   ['5-img/5-3.jpg','5-img/5-6.jpg'],
+				   ['5-img/5-2.jpg','5-img/5-4.jpg'],
+				  ];
+
+		var oUl = document.getElementById('ul1');
+		var str = '';
+		for(var i=0; i<arr.length; i++){
+			str += '<li><div>';
+
+			for(var j=0; j<arr[i].length; j++){
+				str += '<img src="'+arr[i][j]+'" alt="" />';
+			}
+					
+			str += '</div></li>';
+		}
+		oUl.innerHTML = str;
+
+		var aLi = oUl.getElementsByTagName('li');
+
+		var flag = 0;
+		for(var i=0; i<aLi.length; i++){
+			fnSlide(aLi[i]);
+		}
+
+		function fnSlide(li){
+			var oDiv = li.getElementsByTagName('div')[0];
+			function fnSlideOnce(){
+				setTimeout(function(){
+					flag = flag == 0 ? -50 : 0;
+					doMove(oDiv, 'top', 10, flag, fnSlideOnce);
+				}, Math.round(Math.random() * 2000 + 1000));
+			}
+			fnSlideOnce();				
+		}
+
+
+	}
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<ul id='ul1'> 
+			<!-- <li>
+				<div>
+					<img src="5-img/5-1.jpg" alt="" />
+					<img src="5-img/5-2.jpg" alt="" />
+				</div>
+			</li>
+			<li>
+				<div>
+					<img src="5-img/5-3.jpg" alt="" />
+					<img src="5-img/5-4.jpg" alt="" />
+				</div>
+			</li>
+			<li>
+				<div>
+					<img src="5-img/5-5.jpg" alt="" />
+					<img src="5-img/5-6.jpg" alt="" />
+				</div>
+			</li>
+			<li>
+				<div>
+					<img src="5-img/5-7.jpg" alt="" />
+					<img src="5-img/5-8.jpg" alt="" />
+				</div>
+			</li>
+			<li>
+				<div>
+					<img src="5-img/5-8.jpg" alt="" />
+					<img src="5-img/5-1.jpg" alt="" />
+				</div>
+			</li>
+			<li>
+				<div>
+					<img src="5-img/5-2.jpg" alt="" />
+					<img src="5-img/5-3.jpg" alt="" />
+				</div>
+			</li>
+			<li>
+				<div>
+					<img src="5-img/5-4.jpg" alt="" />
+					<img src="5-img/5-5.jpg" alt="" />
+				</div>
+			</li>
+			<li>
+				<div>
+					<img src="5-img/5-1.jpg" alt="" />
+					<img src="5-img/5-2.jpg" alt="" />
+				</div>
+			</li> -->
+		</ul>
+	</div>
+</body>
+</html>

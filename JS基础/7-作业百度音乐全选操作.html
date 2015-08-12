@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	ul,li{padding:0; margin:0;}
+	li{list-style:none; height:30px; border-bottom:1px solid #ddd;}
+</style>
+<script>
+	
+	window.onload = function(){
+			
+		var oUl = document.getElementById('ul1');
+		var aLi = oUl.getElementsByTagName('li');
+		var aInput = oUl.getElementsByTagName('input');
+		
+		aInput[aInput.length-1].onclick = function(){
+			
+			for(var i=0; i<aInput.length-1; i++){
+				
+				aInput[i].checked = aInput[aInput.length-1].checked;
+				
+				aLi[i].style.background = aInput[i].checked ? '#eee':'';
+				
+			/*	if(aInput[i].checked){
+					aLi[i].style.background = '#ccc';	
+				}else{
+					aLi[i].style.background = '';
+				}*/
+				
+			}
+				
+		}
+		
+		for(var i=0; i<aInput.length-1; i++){
+				
+			aInput[i].index = i;	
+			aLi[i].index = i;
+			aInput[i].onclick = function(){
+				var isAll = true;
+				if(this.checked){
+					
+					for(var i=0; i<aInput.length-1; i++){
+						if(!aInput[i].checked){
+							isAll = false;
+						}	
+					}
+					
+					if(isAll){
+						aInput[aInput.length-1].checked = true;	
+					}
+					
+					aLi[this.index].style.background = '#eee';
+				}else{
+					aInput[aInput.length-1].checked = false;
+					aLi[this.index].style.background = '';
+				}
+				
+			}
+			
+			aLi[i].onmouseover = function(){
+				this.style.background = '#eee';
+			}
+			
+			aLi[i].onmouseout = function(){
+				if(!aInput[this.index].checked){
+					this.style.background = '';	
+				}
+				
+			}
+		}
+			
+	}
+
+</script>
+</head>
+
+<body>
+
+
+	<ul id="ul1">
+    	<li>
+        	<input type="checkbox" /> 私奔
+        </li>
+    	<li>
+        	<input type="checkbox" /> 北京北京
+        </li>
+    	<li>
+        	<input type="checkbox" /> 我爱你中国
+        </li>
+    	<li>
+        	<input type="checkbox" /> 花火
+        </li>
+    	<li>
+        	<input type="checkbox" /> 回来
+        </li>
+    	<li>
+        	<input type="checkbox" /> 全选
+        </li>
+    </ul>
+
+
+
+</body>
+</html>

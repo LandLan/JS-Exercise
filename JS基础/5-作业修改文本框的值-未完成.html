@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	body,dl,dt,dd{padding:0; margin:0;}
+	dt {height:30px; background: #093; color:#fff; line-height:30px;}
+	dd{height:30px; line-height:30px;}
+
+	dd .inputText {display:none;}
+</style>
+
+<script>
+
+	window.onload = function(){
+		
+		var oBox = document.getElementById('box');
+		var aDd = oBox.getElementsByTagName('dd');
+		var aInput = oBox.getElementsByTagName('input');
+		
+//		//alert(aDd.length);
+//		
+//		for(var i=0; i<aDd.length; i++){
+//			var aDiv = aDd[i].getElementsByTagName('div');
+//			//alert(aDiv.length);
+//			var oA = aDiv[0].getElementsByTagName('a')[0];
+//			
+//			//var oA = aDd[i].getElementsByTagName('a')[0];
+//			oA.index = i;
+//			alert(oA.index);
+//			oA.onclick = function(){
+//				
+//				var aDiv2 = aDd[oA.index].getElementsByTagName('div');
+//				
+//					aDiv2[0].style.display = 'none';
+//					aDiv2[1].style.display = 'block';
+//
+//			}
+//			
+//			
+//		}
+
+
+		
+	
+	}
+
+</script>
+
+</head>
+
+<body>
+
+	<dl id="box">
+    	<dt>分类名称</dt>
+    	<dd id="dd">
+        	<div>
+        		<span>妙味远程课堂</span>
+            	<a href="javascript:;">重命名</a>
+            </div>
+        	
+            <div class="inputText">
+                <input type="text" value=""  />
+                <a href="javascript:;" > 保存 </a>
+                <a href="javascript:;" > 取消 </a>
+        	</div>
+        </dd>
+    	<dd>
+        	<div>
+                <span>妙味实体课堂</span>
+                <a href="javascript:;">重命名</a>
+            </div>
+
+            <div class="inputText">
+                <input type="text" value=""  />
+                <a href="javascript:;" > 保存 </a>
+                <a href="javascript:;" > 取消 </a>
+        	</div>
+        </dd>
+    </dl>
+
+</body>
+</html>

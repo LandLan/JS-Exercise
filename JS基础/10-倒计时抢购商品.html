@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	body, div, p, ul, img, input, h3, dl, dt, dd{margin:0; padding:0;}
+	li{list-style:none;}
+	img{border:0;}
+	a{text-decoration:none;}
+
+	#wrap {width:868px; margin:20px auto; overflow:hidden;}
+	#title {line-height: 30px; border-bottom: 1px solid #000; margin-bottom: 10px;}
+	#ul1 {width:888px; height:300px; position:relative; }
+	#ul1 li {width:200px; height:300px; border:1px solid #333; position: absolute; top:0;}
+	#ul1 .content { position: absolute; top:0; left:0;}
+	#ul1 .inp {width: 196px; height:30px; margin: 4px auto;}
+	#ul1 .txt {width: 150px; line-height: 24px; text-indent: 4px;}
+	#ul1 .btn {width: 36px;line-height: 24px; }
+	#ul1 .clcok { font-size: 14px; line-height:26px; text-indent: 4px;}
+	#ul1 .clcok span{color:#C80909;}
+	#ul1 img {width:196px; height:140px; margin-left: 2px;}
+	#ul1 h3 { font-size: 14px; font-weight: normal; color: #333; width: 196px; margin-left:2px;}
+	#ul1 .money {font-size: 14px; font-weight: bold; width: 196px; margin-left:2px; margin-top: 4px;}
+	#ul1 .money span {color: #C80909;}
+	#ul1 li .liBg {width:198px; height:300px; position:absolute; top:0; left:0; }
+
+	#dl1{ margin-top: 20px; width:868px;}
+	#dl1 dt {width:868px; line-height: 30px; background: #F2DDFB;} 
+	#dl1 dt .thingName{display:inline-block; width:300px; text-align:center; font-weight:bold;}
+	#dl1 dt .thingMoney{display:inline-block; width:160px; text-align:center;  font-weight:bold;}
+
+	#dl1 dd { width:868px; height: 100px; margin-top: 10px; position:relative; background:#F2DDFB;}
+	#dl1 dd .thingName{display:inline-block;width:300px; line-height: 100px; font-size:14px; color: #333;}
+	#dl1 dd .thingMoney{ display:inline-block;width:160px; line-height:100px; text-align:center; color:#C80909;}
+	#dl1 dd img{ width: 100px; height:80px; position:absolute; right: 60px; border:2px solid #B10A1E; top: 10px;}
+
+	#total {line-height: 30px; font-size:24px; font-weight:bold; margin-top: 20px;}
+	#total span {color: #C80909;}
+</style>
+<script type="text/javascript" src="common.js"></script>
+<script type="text/javascript">
+	
+	window.onload = function(){
+
+		var oNow = new Date();
+		var oYear = oNow.getFullYear();
+		var oMonth = toTwo(oNow.getMonth() + 1);
+		var oDate = toTwo(oNow.getDate());
+		var oHour = toTwo(oNow.getHours());
+		var oMin = toTwo(oNow.getMinutes());
+		var oSec = toTwo(oNow.getSeconds());
+		var str = oYear + "-" + oMonth + "-" + oDate + " " + oHour + ":" + oMin + ":" + oSec;
+ 	
+		var oUl1 = document.getElementById('ul1');
+		var aLi = oUl1.getElementsByTagName('li');
+		var oTotal = document.getElementById('total');
+		var spanTotal = oTotal.getElementsByTagName('span')[0];
+
+		for(var i=0; i<aLi.length; i++){
+			aLi[i].style.left =10 + i * 215 + 'px';
+
+			var oDiv1 = aLi[i].getElementsByTagName('div')[1];
+			var oTxt = oDiv1.getElementsByTagName('input')[0];
+			var oBtn = oDiv1.getElementsByTagName('input')[1];
+			var oH3 = oDiv1.getElementsByTagName('h3')[0];
+			
+			
+			var oDl = document.getElementById('dl1');
+
+			oTxt.value = str;
+
+			oBtn.index = i;
+			oBtn.onclick = function(){
+				var oLi =  aLi[this.index];
+				var pos = parseInt(getStyle(oLi, 'left'));
+				var oDiv1 = aLi[this.index].getElementsByTagName('div')[1];
+				var oImg = oDiv1.getElementsByTagName('img')[0];
+				var oTxt = oDiv1.getElementsByTagName('input')[0];
+				var oP1 = aLi[this.index].getElementsByTagName('p')[0];
+				var oMon = oDiv1.getElementsByTagName('p')[1].getElementsByTagName('span')[0];
+				var oPspan = aLi[this.index].getElementsByTagName('p')[1].getElementsByTagName('span')[0];
+				var strFutureTime = oTxt.value;
+				
+				var oNewDate = new Date(parseInt(strFutureTime.substr(0,4)), parseInt(strFutureTime.substr(5,2))-1, parseInt(strFutureTime.substr(8,2)), parseInt(strFutureTime.substr(11,2)), parseInt(strFutureTime.substr(14,2)), parseInt(strFutureTime.substr(17,2)) );
+
+				
+				var timer = null;
+
+				timer = setInterval(function(){
+
+
+					var oNow = new Date();
+
+					var t = Math.floor((oNewDate - oNow)/1000);
+					// console.log(oNewDate + "   " + oNow + "   " + t);
+
+					if(t == 0){
+						clearInterval(timer);
+						shake(oLi, 'left', pos, 8, function(){
+							opacity(oDiv1, 5, 0);
+							doMove(oDiv1, 'top', 20, 300, function(){
+
+								//var strDd = oDl.innerHTML;
+								var strHtml = '<dd><a class="thingName" href="javascript:;">'+oH3.innerHTML+'</a><span class="thingMoney">'+oMon.innerHTML+'</span><img src="'+oImg.src+'" alt="" /></dd>';
+								//console.log(oH3.innerHTML);
+								//console.log(oMon.innerHTML);
+								oDl.innerHTML += strHtml;
+
+								var oldSum = Number(spanTotal.innerHTML);
+								
+								var strMoney = oPspan.innerHTML;
+
+								var thingMoney = Number(strMoney.substr(1,strMoney.length-1 ));
+								console.log(oPspan.innerHTML);
+								console.log(oldSum);
+
+								spanTotal.innerHTML = (thingMoney + oldSum) + "";
+
+							});
+
+						});
+					}
+
+					var oDay = toTwo(Math.floor(t/86400));
+					var oHour = toTwo(Math.floor(t % 86400 / 3600));
+					var oMin = toTwo(Math.floor(t % 86400 % 3600 / 60));
+					var oSec = toTwo(t % 60);
+
+
+					var aSpan = oP1.getElementsByTagName('span');
+					aSpan[0].innerHTML = oDay;
+					aSpan[1].innerHTML = oHour;
+					aSpan[2].innerHTML = oMin;
+					aSpan[3].innerHTML = oSec;
+
+				}, 1000);
+
+			}
+		}
+
+	}
+
+	function toTwo(num){
+		return num > 9 ? ''+num : "0" + num;
+	}
+
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<p id="title">限购时间</p>
+		<ul id="ul1">
+			<li>
+				<div class='imgBg'>
+					<img class="liBg" src="5-img/5-2.jpg" alt="">
+				</div>
+				<div class="content">
+					<div class="inp">
+						<input  class="txt" type="text" value='Thu Jun 04 2015 16:19:46' />
+						<input class="btn" type="button" value="确定" />
+					</div>
+					<p class="clcok">剩余 <span>00</span> 天 <span>00</span> 时 <span>00</span> 分 <span>00</span> 秒</p>
+					
+					<img src="5-img/5-1.jpg" alt="" />
+					<h3>疯狂599：美的爆款隐藏式面板下拉门微波炉</h3>
+					<p class="money">抢购价: <span>￥560.00</span></p>
+				</div>
+				
+			</li>
+			<li>
+				<div>
+					<img class="liBg" src="5-img/5-2.jpg" alt="">
+				</div>
+				<div class="content">
+					<div class="inp">
+						<input class="txt" type="text" />
+						<input class="btn" type="button" value="确定" />
+					</div>
+					<p class="clcok">剩余 <span>00</span> 天 <span>00</span> 时 <span>00</span> 分 <span>00</span> 秒</p>
+					
+					<img src="5-img/5-3.jpg" alt="" />
+					<h3>疯狂599：美的爆款隐藏式面板下拉门微波炉</h3>
+					<p class="money">抢购价: <span>￥1.00</span></p>
+				</div>
+				
+			</li>
+			<li>
+				<div>
+					<img class="liBg" src="5-img/5-2.jpg" alt="">
+				</div>
+				<div class="content">
+					<div class="inp">
+						<input class="txt" type="text" />
+						<input class="btn" type="button" value="确定" />
+					</div>
+					<p class="clcok">剩余 <span>00</span> 天 <span>00</span> 时 <span>00</span> 分 <span>00</span> 秒</p>
+					
+					<img src="5-img/5-4.jpg" alt="" />
+					<h3>疯狂599：美的爆款隐藏式面板下拉门微波炉</h3>
+					<p class="money">抢购价: <span>￥2590.00</span></p>
+				</div>
+				
+			</li>
+			<li>
+				<div>
+					<img class="liBg" src="5-img/5-2.jpg" alt="">
+				</div>
+				<div class="content">
+					<div class="inp">
+						<input class="txt" type="text" />
+						<input class="btn" type="button" value="确定" />
+					</div>
+					<p class="clcok">剩余 <span>00</span> 天 <span>00</span> 时 <span>00</span> 分 <span>00</span> 秒</p>
+					
+					<img src="5-img/5-5.jpg" alt="" />
+					<h3>疯狂599：美的爆款隐藏式面板下拉门微波炉</h3>
+					<p class="money">抢购价: <span>￥45.00</span></p>
+				</div>
+			</li>
+		</ul>
+
+		<dl id="dl1">
+			<dt><span class="thingName">商品</span><span class="thingMoney">价钱</span></dt>
+			<!-- <dd>
+				<a class="thingName" href="javascript:;">疯狂599：美的爆款隐藏式面板下拉门微波炉</a>
+				<span class="thingMoney">￥1.00</span>
+				<img src="5-img/5-1.jpg" alt="" />
+			</dd> -->
+		</dl>
+		<p id="total"> 总价： <span>0.00</span> 元</p>
+	</div>
+</body>
+</html>

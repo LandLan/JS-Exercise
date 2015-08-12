@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	body, div, p, dl, dt, dd, ul, input {padding:0; margin:0;}
+	li{list-style:none;}
+	body {background: #F7F0F0;}
+	#wrap { width: 600px; margin: 20px auto; position:relative;}
+	#content { width: 400px; height: 200px; padding: 10px; background: #fff;}
+	#content span {background:#F9C29D;}
+	#toolBox {border: 10px solid #FF0565; width: 400px; height: 130px; margin-top: 20px; display:none; position:relative;}
+	#toolBox ul {width: 380px; height:30px; border-bottom: 2px solid #F51151; margin: 10px auto;}
+	#toolBox li { width: 100px; line-height: 30px; float:left; text-align:center; cursor:pointer;}
+	#toolBox li.active {background:#F51151;}
+	#toolBox .tool{width: 380px; height:30px; margin: 30px auto;}
+	#toolBox .text {width: 150px; line-height:26px; text-indent:4px; font-size: 14px;}
+	#toolBox span {display:block; width:15px; line-height:15px; position:absolute; top:10px; right:10px; border:1px solid #000; text-align:center; cursor:pointer;}
+	#replace {display:none;}
+
+	#toolNav {position:absolute; right: 50px; top: 50px; width: 100px; height:80px ;}
+	#toolNav p {line-height:38px; font-size: 20px; background:#666; color: #fff; text-align:center; cursor:pointer;}
+	#toolNav ul {font-size: 18px; text-align:center; display:none; }
+	#toolNav li {margin-top: 2px;line-height:38px; font-size: 18px; background:#ccc; text-align:center; cursor:pointer; }
+	#toolNav li.active {background:#F65151;  }
+</style>
+<script type="text/javascript">
+	
+	window.onload = function(){
+
+		var oToolNav = document.getElementById('toolNav');
+		var oP = oToolNav.getElementsByTagName('p')[0];
+		var oUl = oToolNav.getElementsByTagName('ul')[0];
+		var aLi = oUl.getElementsByTagName('li');
+
+		var oToolBox = document.getElementById('toolBox');
+		var oToolBoxUl = oToolBox.getElementsByTagName('ul')[0];
+		var aToolBoxLi = oToolBoxUl.getElementsByTagName('li');
+		var aToolBoxDiv = oToolBox.getElementsByTagName('div');
+		var oToolBoxSpan = oToolBox.getElementsByTagName('span')[0];
+
+		var oFindDiv = document.getElementById('find');
+		var aInpFind = oFindDiv.getElementsByTagName('input');
+
+		var oRepDiv = document.getElementById('replace');
+		var aInpRep = oRepDiv.getElementsByTagName('input');
+
+		var oContent = document.getElementById('content');
+		var strContent = oContent.innerHTML;
+
+		var onOff = true;
+		oP.onclick = function(){
+			if(onOff){
+				oUl.style.display = 'block';
+			}else{
+				oUl.style.display = 'none';
+			}
+			onOff = !onOff;
+		}
+
+		var num1 = 0;
+		var num2 = 0;
+		for(var i=0; i<aLi.length; i++){
+			aLi[i].index = i;
+			aLi[i].onmouseover = function(){
+				aLi[num1].className = '';
+				this.className = 'active';
+				num1 = this.index;
+			}
+
+			aLi[i].onclick = function(){
+				oUl.style.display = 'none';
+				onOff = !onOff;
+				oToolBox.style.display = 'block';
+				aToolBoxLi[num2].className = '';
+				aToolBoxLi[this.index].className = 'active';
+
+				aToolBoxDiv[num2].style.display = 'none';
+				aToolBoxDiv[this.index].style.display = 'block';
+
+
+				num2 = this.index;
+				oContent.innerHTML = strContent;
+
+			}
+		}
+
+		//var num3 =0;
+		for(var i=0; i<aToolBoxLi.length; i++){
+			aToolBoxLi[i].index = i;
+			aToolBoxLi[i].onclick = function(){
+				this.className = 'active';
+				aToolBoxLi[num2].className = '';
+				aToolBoxDiv[num2].style.display = 'none';
+				aToolBoxDiv[this.index].style.display = 'block';
+				num2 = this.index;
+				oContent.innerHTML = strContent;
+			}
+		}
+
+		oToolBoxSpan.onclick = function(){
+			oToolBox.style.display = 'none';
+			oContent.innerHTML = strContent;
+		}
+
+		
+		aInpFind[1].onclick = function(){
+			var str = aInpFind[0].value;
+			oContent.innerHTML = strContent.split(str).join('<span>'+str+'</span>')
+			
+		}
+
+		aInpRep[2].onclick = function(){
+			var oldStr = aInpRep[0].value;
+			var newStr = aInpRep[1].value;
+			oContent.innerHTML = strContent.split(oldStr).join('<span>'+newStr+'</span>');
+			strContent = strContent.split(oldStr).join(newStr);
+			
+		}
+	}
+
+
+</script>
+</head>
+<body>
+	<div id='wrap'>
+		<p id='content'>
+			《机甲萌主》：
+			中国古代高科技文明机关术与星际高度发达机甲科技。
+		    来自21世纪的孤独症天才少女与未来星际沉默忠犬大叔。
+		    穿着军大衣的大叔拿着相传是远古地球的纸质笔记本，认真地写着——
+		    �偃师养成守则】
+		    少女的小手盖在笔记本上，漆黑的眸子无言的望着他，而后看向远处瑰丽璀璨的星域。
+		    大叔顿住笔，摸摸少女的小脑袋，在泛黄的纸张写下——
+		    陪着她。
+		    少女心里默默念叨——
+		    和偃九一起打宝赚钱去星际冒险。
+		</p>
+		<div id='toolBox'>
+			<ul>
+				<li>查找</li>
+				<li>替换</li>
+			</ul>
+			<div class='tool' id='find'>
+				<input class='text' type='text' />
+				<input type='button' value='查找' />
+			</div>
+			<div class='tool' id='replace'>
+				<input class='text' type='text' />
+				<input class='text' type='text' />
+				<input type='button' value='替换' />
+			</div>
+			<span>X</span>
+		</div>
+		<div id='toolNav'>
+			<p>展开</p>
+			<ul>
+				<li>查找</li>
+				<li>替换</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

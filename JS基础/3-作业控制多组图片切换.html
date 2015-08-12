@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	body, input, div, img, p, ul {padding:0; margin:0; }
+	img{border:none;}
+	li { list-style:none;}
+	#prev, #next {margin:10px 0 0 30px;}
+	
+	#div1 {width:800px; height:500px; margin:50px auto; border:1px solid #000; background:#eee;}
+	#div1 ul {}
+	#div1 ul li {width:350px; height:350px; float:left;margin:20px; border:5px solid #FFF;}
+	#div1 ul li img {width:350px; height:300px;}
+	#div1 ul li p {text-align:center;}
+	#div1 ul li span {}
+
+</style>
+<script>
+	
+	window.onload = function(){
+		
+		var aLi = document.getElementsByTagName('li');
+		var aImg = document.getElementsByTagName('img');
+		var aP = document.getElementsByTagName('p');
+		var aSpan = document.getElementsByTagName('span');
+		
+		var oPrev = document.getElementById('prev');
+		var oNext = document.getElementById('next');
+		
+		
+		var arr1 = ['3-img/1.png','3-img/2.png','3-img/3.png','3-img/4.png'];
+		var arr2 = ['3-img/1.jpg','3-img/2.jpg','3-img/3.jpg'];
+		
+		var arr = [arr1,arr2];
+		
+		var arrSrc = null;
+
+		for(var i=0; i<aImg.length; i++){
+
+			var num = 0;
+			aImg[i].index = i;
+			aImg[i].count = 0;
+
+			aImg[i].onclick = function(){
+				
+				arrSrc = arr[this.index];
+					
+				this.count = this.count+1;
+				if(this.count == arrSrc.length){
+					this.count = 0;
+				}
+				
+				this.src = arrSrc[this.count];
+				aP[this.index].innerHTML =  "第" + (this.index+1) + "组第" + (this.count + 1) + "张";
+				aSpan[this.index].innerHTML =  (this.count+1) + " / " + arrSrc.length ;
+				
+			}
+		}
+		
+		oNext.onclick = function(){
+			
+			for(var i=0; i<aImg.length; i++){
+				
+				arrSrc = arr[aImg[i].index];
+				
+				aImg[i].count = aImg[i].count+1;
+				if(aImg[i].count == arrSrc.length){
+					aImg[i].count = 0;
+				}
+				
+				aImg[i].src = arrSrc[aImg[i].count];
+				aP[aImg[i].index].innerHTML =  "第" + (aImg[i].index+1) + "组第" + (aImg[i].count + 1) + "张";
+				aSpan[aImg[i].index].innerHTML =  (aImg[i].count+1) + " / " + arrSrc.length ;
+				
+			}
+			
+		}
+		
+		
+		oPrev.onclick = function(){
+			
+			for(var i=0; i<aImg.length; i++){
+				
+				arrSrc = arr[aImg[i].index];
+				
+				aImg[i].count = aImg[i].count-1;
+				if(aImg[i].count == -1){
+					aImg[i].count = arrSrc.length-1;
+				}
+				
+				aImg[i].src = arrSrc[aImg[i].count];
+				aP[aImg[i].index].innerHTML =  "第" + (aImg[i].index+1) + "组第" + (aImg[i].count + 1) + "张";
+				aSpan[aImg[i].index].innerHTML =  (aImg[i].count+1) + " / " + arrSrc.length ;
+				
+			}
+			
+		}
+		
+		
+	}
+
+</script>
+</head>
+
+<body>
+
+<div id="wrap">
+
+	<div id="div1">
+    	<input id="prev" type="button" value="上一组"  />
+        <input id="next" type="button" value="下一组"  />
+        
+        <ul>
+        	<li>
+            	<img src="3-img/1.png"  />
+                <p>第1组第1张</p>
+                <span>1 / 4</span>
+            </li>
+            
+        	<li>
+            	<img src="3-img/1.jpg"  />
+                <p>第2组第1张</p>
+                <span>1 / 3</span>
+            </li>
+        </ul>
+        
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	ul{padding:0; margin:0;}
+	li{list-style:none; width:30px; height:30px; border:1px solid #666; float:left; margin-right:5px;}
+	span { display:none;}
+	
+	
+</style>
+
+<script>
+	
+	window.onload = function(){
+		var aLi = document.getElementsByTagName('li');
+		
+		var oSpan = document.getElementsByTagName('span')[0];
+		var lastLi = 0;
+		var oText = ['极差','较差','还好','推荐','力荐'];
+		
+		var oColor = ['#ccc','#ccc','#FC3','#FC3','#FC3'];
+		for(var i=0; i<aLi.length; i++){
+			aLi[i].index = i;
+			aLi[i].onmouseover = function(){
+
+/*				for(var i=0; i<aLi.length; i++){
+					if(i <= this.index){
+						aLi[i].style.backgroundColor = oColor[this.index];
+					}else{
+						aLi[i].style.backgroundColor = '';
+					}
+				}
+				
+				oSpan.style.display = 'block';
+				oSpan.innerHTML = oText[this.index];*/
+				move(this.index);
+			}
+			
+			aLi[i].onmouseout = function(){
+
+/*				for(var i=0; i<aLi.length; i++){
+				
+					if(i <= lastLi ){
+						aLi[i].style.backgroundColor = oColor[lastLi];
+						
+					}else{
+						aLi[i].style.backgroundColor = '';
+					}
+					
+				}
+				
+				oSpan.style.display = 'block';
+				oSpan.innerHTML = oText[lastLi];*/
+				
+				move(lastLi);
+				
+			}
+			
+			aLi[i].onclick = function(){
+				for(var i=0; i<aLi.length; i++){
+					if(i <= this.index){
+						aLi[i].style.backgroundColor = oColor[this.index];
+					}
+				}
+				lastLi = this.index;
+			}
+			
+			
+		}
+		
+		function move(index){
+			for(var i=0; i<aLi.length; i++){
+			
+				if(i <= index ){
+					aLi[i].style.backgroundColor = oColor[index];
+					
+				}else{
+					aLi[i].style.backgroundColor = '';
+				}
+				
+			}
+			
+			oSpan.style.display = 'block';
+			oSpan.innerHTML = oText[index];
+		}
+			
+	}
+	
+</script>
+</head>
+
+<body>
+	<div>
+    	<h2>总体评价：</h2>
+        <ul>
+        	<li></li>
+        	<li></li>
+        	<li></li>
+        	<li></li>
+        	<li></li>
+        </ul>
+        <span>力荐</span>
+    </div>
+</body>
+</html>

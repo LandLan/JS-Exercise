@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	body, div, p, ul, li {padding:0; margin:0;}
+	a {text-decoration:none;}
+	li {list-style:none;}
+	#wrap { margin:50px auto; width:800px; height:450px;  border: 1px solid #ccc; position:relative;}
+	
+	#wrap .set {font-size: 18px; font-weight:bold; line-height:30px;padding: 10px 10px;}
+	#wrap .set a {font-size:14px; background: #f00; display:inline-block; padding:0 10px; color:#fff;}
+	
+	#div1 { width:100px; height:100px; border:5px solid #000; margin-left:10px;}
+	
+	#cover {background:#000; opacity: 0.3; position:absolute; top:0; left:0; width:800px; height:450px; display:none;}
+	
+	#toolBox{ position:absolute; border:10px solid #CCC; width:300px; height:200px; bottom:40px; right:20px; background:#fff; display:none; }
+	#toolBox ul { margin: 16px auto; width: 230px;}
+	#toolBox li{line-height:30px; margin-top:5px;}
+	#toolBox a{display:inline-block; width:30px; height:30px;  line-height: 30px; border:1px solid #ddd; margin-right:5px; font-size:12px; text-align:center;}
+	
+	#toolBox p {text-align:center; padding-top:10px;}
+	#reset, #submit {display:inline-block; color:#fff; background:#036; height:30px; padding: 0 20px; line-height:30px; text-align:center; cursor:pointer;}
+	
+	.origin {width:100px; height:100px; background: #fff;}
+	.cc {color:#fff;}
+	.wh {background:#eee; color:#666;}
+	.red {background:#f00;}
+	.yellow {background:#FC6;}
+	.blue {background:#00F;}
+	.w200 {width:200px;}
+	.w300 {width:300px;}
+	.w400 {width:400px;}
+	.h200 {height:200px;}
+	.h300 {height:300px;}
+	.h400 {height:400px;}
+	
+</style>
+
+<script>
+
+	window.onload = function(){
+		var oSetBtn = document.getElementById('setBtn');
+		var oResetBtn = document.getElementById('reset');
+		var oSubmitBtn = document.getElementById('submit');
+		
+		var oDiv1 = document.getElementById('div1');
+		var oCover = document.getElementById('cover');
+		var oToolBox = document.getElementById('toolBox');
+		
+		oSetBtn.onclick = function(){
+			oCover.style.display = 'block';
+			oToolBox.style.display = 'block';
+		}
+		
+		oResetBtn.onclick = function(){
+			oDiv1.className = 'origin';
+		}
+		
+		oSubmitBtn.onclick = function(){
+			oCover.style.display = 'none';
+			oToolBox.style.display = 'none';
+		}
+		
+	}
+
+</script>
+
+</head>
+
+<body>
+
+	<div id="wrap">
+    	<p class="set">请为下面的DIV设置样式：<a id="setBtn" href="javascript:;">点击设置</a></p>
+        <div id="div1"></div>
+        <div id="cover"></div>
+        <div id="toolBox">
+        	<ul>
+            	<li>请选择背景色：<a class="red cc" href="javascript:;">红色</a><a class="yellow cc" href="javascript:;">黄色</a><a  class="blue cc" href="javascript:;">蓝色</a></li>
+                <li>请选择宽(px)：<a class="wh" href="javascript:;">200px</a><a class="wh" href="javascript:;">300px</a><a  class="wh" href="javascript:;">400px</a></li>
+                <li>请选择高(px)：<a class="wh" href="javascript:;">200px</a><a class="wh" href="javascript:;">300px</a><a  class="wh" href="javascript:;">400px</a></li>
+            </ul>
+            <p>
+                <span id='reset'>恢复</span>
+                <span id='submit'>确定</span>
+            </p>
+        </div>
+        
+    </div>
+
+</body>
+</html>

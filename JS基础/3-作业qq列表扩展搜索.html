@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	div,ul,h2{padding:0; margin:0;}
+	li{list-style:none;}
+	div{ width: 200px; margin:0 auto; border:1px solid #000;}
+	#list {}
+	#list .lis {}
+	#list h2 {background: url(3-img/ico1.gif) no-repeat 8px #3FF; line-height:30px; text-indent:20px;}
+	#list .active { background:url(3-img/ico2.gif) no-repeat 8px #FF3;}
+	#list ul {display:none;}
+	#list ul li { line-height:30px; border-bottom:1px solid #000; text-indent:24px; }
+	#list .click { background:#6F6;}
+	
+</style>
+<script>
+	
+	window.onload = function(){
+		var oUl = document.getElementById('list');
+		var aH = oUl.getElementsByTagName('h2');
+		var aUl = oUl.getElementsByTagName('ul');
+		var aLi = null;
+		var arrLi = [];
+		
+		for(var i=0; i<aH.length; i++){
+			aH[i].index = i;
+			aH[i].onclick = function(){
+				
+				if(this.className == ''){
+					
+					for(var i=0; i<aH.length; i++){
+						if(aH[i].className=='active'){
+							aH[i].className = '';
+							aUl[i].style.display = 'none';
+						}
+					}
+					
+					this.className = 'active';
+					aUl[this.index].style.display = 'block';
+				}else{
+					this.className = '';
+					aUl[this.index].style.display = 'none';
+				}
+				
+			}
+		}
+		
+		for(var i=0; i<aUl.length; i++){
+			aLi = aUl[i].getElementsByTagName('li');
+			for(var j=0; j<aLi.length; j++){
+				arrLi.push(aLi[j]);	
+			}
+		}
+
+		for(var i=0; i<arrLi.length; i++){
+			
+			arrLi[i].onclick = function(){
+				
+				
+				for(var i=0; i<arrLi.length; i++){
+					if(arrLi[i] != this){
+						arrLi[i].className = '';
+					}
+				}
+				
+				if(this.className == ''){
+					this.className = 'click';
+				}else{
+					this.className = '';
+				}
+				
+				
+			}
+		}
+	
+	}
+
+</script>
+</head>
+
+<body>
+
+	<div>
+    	<ul id='list'>
+        	<li class="lis">
+            	<h2>我的好友</h2>
+                <ul>
+                	<li>张三</li>
+                	<li>张三</li>
+                	<li>张三</li>
+                	<li>张三</li>
+                </ul>
+            </li>
+        	<li class="lis">
+            	<h2>企业好友</h2>
+                <ul>
+                	<li>李四</li>
+                	<li>李四</li>
+                	<li>李四</li>
+                	<li>李四</li>
+                	<li>李四</li>
+                </ul>
+            </li>
+        	<li class="lis">
+            	<h2>黑名单</h2>
+                <ul>
+                	<li>张小三</li>
+                	<li>李小四</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+ul, li , div{padding:0; margin:0;}
+li { list-style:none;}
+ #ul1 {width:800px; height:500px; margin:50px auto; border:1px solid #000;}
+ #ul1 li {width:50px; height:50px; float:left; line-height:50px; text-align:center; border:1px solid red; margin: 20px 20px; position:relative; background:green; z-index:2;} /* 为什么这里我加上z-index:1 反而还没有遮住后面的li*/
+ 
+ #ul1 div {width:100px; height:40px; position:absolute; background: yellow; border:1px solid #f00; top:5px; left:45px; float:left; display:none;}
+ 
+</style>
+<script>
+
+	window.onload = function(){
+		
+		var oUl = document.getElementById('ul1');
+		
+		var str = '';
+		for(var i=0; i<5; i++){
+			str += '<li>'+(i+1)+'<div></div></li>';
+		}
+		
+		oUl.innerHTML = str;
+			
+		var aLi = oUl.getElementsByTagName('li');
+			
+		for(var m=0; m<aLi.length; m++){
+			aLi[m].onmouseover = function(){
+				
+				var aDiv = this.getElementsByTagName('div');
+				//alert(aDiv.length);
+				this.style.cssText = 'z-index:3;';
+				aDiv[0].style.display = 'block';
+				
+			}
+			
+			aLi[m].onmouseout = function(){
+				
+				var aDiv = this.getElementsByTagName('div');
+				//alert(aDiv.length);
+				this.style.cssText = 'z-index:1;';
+				aDiv[0].style.display = 'none';
+				
+			}
+		}
+		
+		/*
+		原因：在ie6下，不论绝对定位的z-index有多大，比如图中的div，如果父层的div的z-index小于或者等于其它层的z-index，则div会被其它的li覆盖住。
+		解决办法：给父层的li指定z-index
+		*/
+	}
+
+</script>
+</head>
+
+<body>
+
+	<ul id="ul1">
+    	<!--<li>2
+        	<div></div>
+        </li>
+        <li>3<div></div></li>
+        <li>4<div></div></li>-->
+    </ul>
+
+</body>
+</html>

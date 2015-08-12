@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	
+	img { width: 200px; height:250px; position: absolute; top:100px; left: 300px;}
+
+</style>
+<script type="text/javascript" src='common.js'></script>
+<script type="text/javascript">
+	
+	window.onload = function(){
+
+		var oImg = document.getElementsByTagName('img')[0];
+		
+
+		oImg.onclick = function(){
+			//var index = 0; 
+//			var timer = null;
+//			var pos = parseInt(getStyle(oImg, 'left'));
+//			timer = setInterval(function(){
+//
+//				
+//				oImg.style.left = pos + aNum[index] + 'px';
+//				index++;
+//
+//				if(index == aNum.length){
+//					clearInterval(timer);
+//				}
+//
+//			}, 20);
+
+			shake(this, 'left');
+
+		}
+
+
+
+
+		function shake(obj, attr, endFun){
+			var aNum = [];
+			for (var i=20; i>0; i-=2 ) {
+				aNum.push( i, -i );
+			}
+			aNum.push(0);
+			var index = 0; 
+			
+			var pos = parseInt(getStyle(obj, attr));
+			
+			clearInterval(obj.timer);
+			
+			obj.timer = setInterval(function(){
+
+				
+				obj.style.left = pos + aNum[index] + 'px';
+				index++;
+
+				if(index == aNum.length){
+					clearInterval(obj.timer);
+				}
+
+			}, 20);
+
+		}
+
+	}
+
+</script>
+</head>
+<body>
+	<img src="3-img/1.jpg" />
+</body>
+</html>

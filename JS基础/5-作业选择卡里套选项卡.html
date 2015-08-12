@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+
+<style>
+	h2,ul,li{padding:0; margin:0;}
+	li{list-style:none;}
+	#ul1 {border:1px solid #000; width:80px; height:244px; float:left;}
+	#ul1 li {width:80px;line-height:60px; background:#eee; margin-bottom:1px; text-align:center;}
+	#ul1 li.active1 {background:#ddd;}
+	#div1 {position:relative;height:400px; float:left; width:400px; height:244px;border:1px solid #000; }
+	#div1 img {display:block;width:400px; height:244px;}
+	#div1 ul{width:400px;position:absolute; bottom:0; left:0; overflow:hidden;}
+	#div1 li{float:left; width:80px; height:30px; line-height:30px; background:#000; color:#fff; opacity:0.3; text-align:center; margin-right:1px;}
+	#div1 li.active2{background:#F00;}
+
+	
+
+</style>
+<script>
+
+	window.onload = function(){
+	
+		var oUl = document.getElementById('ul1');
+		var aLi = oUl.getElementsByTagName('li');
+		var oDiv = document.getElementById('div1');
+		var oImg = oDiv.getElementsByTagName('img')[0];
+		var oUld = oDiv.getElementsByTagName('ul')[0];
+
+		
+		var aImgUrl1 = ['5-img/5-1.jpg', '5-img/5-2.jpg', '5-img/5-3.jpg'];
+		var aImgUrl2 = ['5-img/5-4.jpg', '5-img/5-5.jpg', '5-img/5-6.jpg','5-img/5-7.jpg'];
+		var aImgUrl3 = ['5-img/5-8.jpg', '5-img/5-1.jpg', '5-img/5-2.jpg','5-img/5-3.jpg','5-img/5-4.jpg'];
+		var aImgUrl4 = ['5-img/5-5.jpg', '5-img/5-6.jpg', '5-img/5-7.jpg'];
+		
+		var aText1 = ['第一组1', '第一组2', '第一组3'];
+		var aText2 = ['第二组1', '第二组2', '第二组3','第二组4'];
+		var aText3 = ['第三组1', '第三组2', '第三组3', '第三组4', '第三组5'];
+		var aText4 = ['第四组1', '第四组2', '第四组3'];
+	
+		
+		var aaImg = [aImgUrl1,aImgUrl2,aImgUrl3,aImgUrl4];
+		var aaText = [aText1, aText2, aText3, aText4];
+		
+		for(var i=0; i<aLi.length; i++){
+			
+			var c = 0;
+			aLi[i].index = i;
+			aLi[i].onmouseover = function(){
+				//for(var i=0; i<aLi.length; i++){
+//					aLi[i].className = '';
+//				}
+				aLi[c].className = '';
+				this.className = 'active1';	
+				c = this.index;
+				
+				var aImgd = aaImg[this.index];
+				oImg.src = aImgd[0];
+				
+				var str = '';
+				for(var i=0; i<aaText[this.index].length; i++){
+					str += '<li>'+aaText[this.index][i]+'</li>';	
+				}
+				
+				oUld.innerHTML = str;
+				
+				var a = parseInt((oDiv.scrollWidth - (aaText[this.index].length-1)) / aaText[this.index].length);
+				
+				var aLid = oUld.getElementsByTagName('li');
+				//alert(aLid[0].scrollWidth);
+				var b = 0;
+				for(var i=0; i<aLid.length; i++){
+					aLid[b].className = 'active2';
+					
+					aLid[i].style.width = a + 'px';
+					aLid[i].index = i;
+					aLid[i].onmouseover = function(){
+						aLid[b].className = '';
+						this.className = 'active2';
+						
+						oImg.src = aImgd[this.index];
+						
+						b = this.index;
+					}
+					
+				}
+				
+			}	
+			
+		}
+		
+	
+		
+	}
+
+</script>
+</head>
+
+<body>
+
+
+	<ul id="ul1">
+    	<li class="active1">
+        	最热团购
+        </li>
+    	<li>
+        	商城特
+        </li>
+    	<li>
+        	名品推荐购
+        </li>
+        <li>
+        	缤纷活动
+        </li>
+    </ul>
+	<div id='div1'>
+        <img src="5-img/5-1.jpg"  />
+        <ul><!--
+            <li>111111</li>
+            <li>222222</li>
+            <li>333333</li>-->
+        </ul>
+    </div>
+
+
+</body>
+</html>
