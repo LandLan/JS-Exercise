@@ -10,7 +10,9 @@ window.onload = function(){
 	var aDivList = getByClass(oList, 'divList');
 	var iContentHeight = 0;
 	var iNow = 0;
-	
+
+	var oWorskContent = $('worksContent');
+	var oWorskContent2 = getByClass(oWorskContent, 'worksContent2')[0];
 
 	contentAuto();
 	listContentAuto();
@@ -18,6 +20,9 @@ window.onload = function(){
 	mouseScroll();
 
 	window.onresize = fnResize;
+
+	worksContentInit();
+
 
 	function bindNav(){
 
@@ -37,7 +42,7 @@ window.onload = function(){
 
 	}
 	
-
+// toMove(2);
 	function toMove(index){
 
 		for(var i=0; i<aLiNav.length; i++){
@@ -144,6 +149,21 @@ window.onload = function(){
 		}
 
 	}
+
+
+	function worksContentInit(){
+		//oWorskContent2
+		var arrImg = ['img/worksimg1.jpg', 'img/worksimg2.jpg', 'img/worksimg3.jpg', 'img/worksimg4.jpg'];
+		
+		for(var i=0; i<arrImg.length; i++){
+			var oDivParent = document.createElement('div');
+			oDivParent.className = 'worksImgParent';
+			oDivParent.innerHTML = '<img class="worksImg" src="'+arrImg[i]+'" alt=""><div class="worksImgMark"><div></div></div>';
+			oWorskContent2.appendChild(oDivParent);
+		}
+
+	}
+
 
 }
 
