@@ -14,6 +14,13 @@ window.onload = function(){
 	var oWorskContent = $('worksContent');
 	var oWorskContent2 = getByClass(oWorskContent, 'worksContent2')[0];
 
+	var oHomeContent = $('homeContent');
+	var oHomeContent1 = getByClass(oHomeContent, 'homeContent1')[0];
+	var oHomeContent2 = getByClass(oHomeContent, 'homeContent2')[0];
+
+	var oAboutContent = $('aboutContent');
+	var oAboutContent3 = getByClass(oAboutContent, 'aboutContent3')[0];
+
 	contentAuto();
 	listContentAuto();
 	bindNav();
@@ -22,6 +29,7 @@ window.onload = function(){
 	window.onresize = fnResize;
 
 	worksContentInit();
+	homeContentInit();
 
 
 	function bindNav(){
@@ -42,7 +50,7 @@ window.onload = function(){
 
 	}
 	
-// toMove(2);
+toMove(3);
 	function toMove(index){
 
 		for(var i=0; i<aLiNav.length; i++){
@@ -164,6 +172,132 @@ window.onload = function(){
 
 	}
 
+	function homeContentInit(){
+		var aLi1 = oHomeContent1.getElementsByTagName('li');
+		var aLi2 = oHomeContent2.getElementsByTagName('li');
+		var oldIndex = 0;
+
+		var arr = [
+			{"text": "One layer"},
+			{"text": "Two layer"},
+			{"text": "Three layer"}
+		];
+
+		for(var i=0; i<arr.length; i++){
+
+			var oLi1 = document.createElement('li');
+			oLi1.innerHTML = '<h1 class="commonTitle">'+arr[i].text+'</h1>';
+
+			var oLi2 = document.createElement('li');
+
+			if(i == 0) {
+				oLi1.className = 'active';
+				oLi2.className = 'active';
+			}
+
+			oHomeContent1.appendChild(oLi1);
+			oHomeContent2.appendChild(oLi2);
+
+		}
+
+		for(var i=0; i<aLi2.length; i++){
+			aLi2[i].index = i;
+			aLi2[i].onclick = function(){
+				
+				for(var i=0; i<aLi2.length; i++){
+					aLi2[i].className = '';
+				}
+
+				this.className = 'active';
+				
+				if(this.index > oldIndex){ // 向右
+					aLi1[this.index].className = 'rightShow';
+					aLi1[oldIndex].className = 'leftHide';
+				}else if(this.index < oldIndex){
+					aLi1[this.index].className = 'leftShow';
+					aLi1[oldIndex].className = 'rightHide';
+				}
+
+				oldIndex = this.index;
+			}
+		}
+
+	}
+
+	aboutContent();
+	
+	// var aAboutImg = getByClass(oAboutContent3, 'aboutImg');
+
+	function aboutContent(){
+		var aUl = oAboutContent3.getElementsByTagName('ul');
+		var aSpan = oAboutContent3.getElementsByTagName('span');
+
+		for(var i=0; i<aUl.length; i++){
+
+			change(aUl[i], aSpan[i]);
+
+		}
+
+		function change(oUl, oSpan){
+			var w = oUl.offsetWidth / 2;
+			var h = oUl.offsetHeight / 2;
+			var oImgUrl = oUl.dataset.src;
+			// aUl[i].index = i;
+
+			for(var j=0; j<4; j++){
+
+				var oLi = document.createElement('li');
+				var oImg = document.createElement('img');
+
+				oLi.style.width = w + 'px';
+				oLi.style.height = h + 'px';
+
+				oLi.style.left = j%2 * w + 'px';
+				oLi.style.top = Math.floor(j/2) * h + 'px';
+
+				oImg.src = oImgUrl;
+				oImg.style.left = -j%2 * w + 'px';
+				oImg.style.top = - Math.floor(j/2) * h + 'px';
+				oImg.oldleft = -j%2 * w;
+				oImg.oldtop = - Math.floor(j/2) * h;
+
+				oLi.appendChild(oImg);
+				oUl.appendChild(oLi);
+			}
+
+
+			var data = [
+				{'name':'top', 'value' : h },
+				{'name':'left', 'value' : -w * 2},
+				{'name':'left', 'value': w },
+				{'name':'top', 'value' : -h * 2}
+			];
+
+
+
+			oUl.onmouseover = function(){
+
+				var aImg = this.getElementsByTagName('img');
+
+				for(var i=0; i<aImg.length; i++){
+					aImg[i].style[data[i].name] = data[i].value + 'px';
+				}
+
+				oSpan.style.transform = 'scale(1)';
+
+			}
+
+			oUl.onmouseout = function(){
+				var aImg = this.getElementsByTagName('img');
+
+				for(var i=0; i<aImg.length; i++){
+					aImg[i].style[data[i].name] = aImg[i]['old'+data[i].name] + 'px';
+				}
+				oSpan.style.transform = 'scale(1.5)';
+			}
+		}
+
+	}
 
 }
 
